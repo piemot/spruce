@@ -1,11 +1,32 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import {
+  PanelLeftOpenIcon,
+  TreePineIcon,
+  SearchIcon,
+  MoonStarIcon,
+} from "@lucide/astro";
 ---
 
 <Layout>
-	<Welcome />
+  <header>
+    <div class="flex justify-between">
+      <span class="flex">
+        <button>
+          <PanelLeftOpenIcon />
+        </button>
+        <TreePineIcon />
+        <span class="">SpruceBytes</span>
+      </span>
+      <span class="flex">
+        <SearchIcon />
+        <MoonStarIcon />
+      </span>
+    </div>
+    <div class="h-1 w-full bg-gradient-to-r from-emerald-800 to-emerald-500">
+    </div>
+  </header>
+  <main>
+    <article></article>
+  </main>
 </Layout>
