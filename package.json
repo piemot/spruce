@@ -10,9 +10,19 @@
   },
   "dependencies": {
     "@astrojs/markdoc": "^0.14.2",
+    "@astrojs/react": "^4.2.7",
+    "@fontsource-variable/source-sans-3": "^5.2.7",
+    "@fontsource-variable/space-grotesk": "^5.2.7",
+    "@fontsource/space-mono": "^5.2.5",
+    "@headlessui/react": "^2.2.3",
     "@lucide/astro": "^0.511.0",
     "@tailwindcss/vite": "^4.1.7",
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
     "astro": "^5.7.13",
+    "lucide-react": "^0.511.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.7"
   },
   "pnpm": {

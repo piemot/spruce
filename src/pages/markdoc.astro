@@ -1,0 +1,134 @@
+---
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Layout from "../layouts/Layout.astro";
+import {
+  PanelLeftOpenIcon,
+  TreePineIcon,
+  SearchIcon,
+  MoonStarIcon,
+  ChevronRightIcon,
+} from "@lucide/astro";
+import { getEntry, render } from "astro:content";
+
+const entry = await getEntry("entries", "markdoc-ex")!;
+const { Content } = await render(entry);
+---
+
+<Layout title="SpruceBytes MarkDoc Demo">
+  <div class="grid h-full w-full grid-cols-1 md:grid-cols-3">
+    <header class="block md:hidden">
+      <div class="flex justify-between p-2">
+        <span class="flex gap-2">
+          <button
+            class="bg-gray-200 text-gray-700 hover:bg-gray-300 p-1.5 rounded-lg"
+          >
+            <PanelLeftOpenIcon />
+            <span class="sr-only">Open Sidebar</span>
+          </button>
+          <a href="/" class="flex items-center gap-1">
+            <TreePineIcon class="text-accent-primary" />
+            <span class="text-xl font-header font-semibold text-accent-primary">
+              SpruceBytes
+            </span>
+          </a>
+        </span>
+        <span class="flex gap-4">
+          <button
+            class="bg-gray-200 text-gray-700 hover:bg-gray-300 p-1.5 rounded-lg"
+          >
+            <SearchIcon />
+            <span class="sr-only">Search</span>
+          </button>
+          <button
+            class="bg-gray-200 text-gray-700 hover:bg-gray-300 p-1.5 rounded-lg"
+          >
+            <MoonStarIcon />
+            <span class="sr-only">Toggle Dark Mode</span>
+          </button>
+        </span>
+      </div>
+      <div class="h-1 w-full bg-gradient-to-r from-emerald-800 to-emerald-500">
+      </div>
+    </header>
+    <header class="hidden md:flex w-full h-[100vh] sticky top-0">
+      <div class="flex-col w-full m-2">
+        <div class="flex w-full justify-between">
+          <a href="/" class="flex items-center gap-1">
+            <TreePineIcon class="text-accent-primary" />
+            <span class="text-xl font-header font-semibold text-accent-primary">
+              SpruceBytes
+            </span>
+          </a>
+          <button
+            class="bg-gray-200 text-gray-700 hover:bg-gray-300 p-1.5 rounded-lg"
+          >
+            <MoonStarIcon />
+            <span class="sr-only">Toggle Dark Mode</span>
+          </button>
+        </div>
+        <div class="p-2">
+          <div
+            class="flex gap-2 w-full font-header p-2 border border-gray-400 hover:border-gray-500 text-gray-600 rounded-lg"
+          >
+            <SearchIcon />Search
+          </div>
+        </div>
+        <nav class="p-2">
+          <ul class="flex flex-col">
+            <li>
+              <span class="flex items-center font-semibold text-accent-primary">
+                <ChevronRightIcon class="size-5" />
+                Meta
+              </span>
+              <ul class="pl-5 text-gray-600 *:hover:text-gray-800">
+                <li><a href="/meta/test">Test</a></li>
+                <li><a href="/meta/test-two">Test Two</a></li>
+              </ul>
+            </li>
+            <li>
+              <span class="flex items-center font-semibold text-accent-primary">
+                <ChevronRightIcon class="size-5" />
+                More Meta
+              </span>
+              <ul class="pl-5 text-gray-600 *:hover:text-gray-800">
+                <li>
+                  <a
+                    href="/meta/test"
+                    class="text-accent-secondary"
+                    aria-current="page">Lorem Ipsum</a
+                  >
+                </li>
+                <li><a href="/meta/test-two">Test Two</a></li>
+              </ul>
+            </li>
+            <li>
+              <span class="flex items-center font-semibold text-accent-primary">
+                <ChevronRightIcon class="size-5" />
+                Meta
+              </span>
+              <ul class="pl-5 text-gray-600 *:hover:text-gray-800">
+                <li><a href="/meta/test">Test</a></li>
+                <li><a href="/meta/test-two">Test Two</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="h-full w-1 bg-gradient-to-b from-emerald-800 to-emerald-500">
+      </div>
+    </header>
+    <main>
+      <Breadcrumbs
+        pages={[
+          { name: "Home", path: "/" },
+          { name: "Meta", path: "/meta" },
+          { name: "Lorem Ipsum", path: "/meta/lorem-ipsum" },
+          { name: "Test", path: "/meta/lorem-ipsum/test" },
+        ]}
+      />
+      <article>
+        <Content revealSecret />
+      </article>
+    </main>
+  </div>
+</Layout>
