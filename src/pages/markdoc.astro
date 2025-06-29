@@ -10,11 +10,11 @@ import {
 } from "@lucide/astro";
 import { getEntry, render } from "astro:content";
 
-const entry = await getEntry("entries", "markdoc-ex")!;
+const entry = await getEntry("posts", "programming")!;
 const { Content } = await render(entry);
 ---
 
-<Layout title="SpruceBytes MarkDoc Demo">
+<Layout title="SpruceBytes MDX Demo">
   <div class="grid h-full w-full grid-cols-1 md:grid-cols-3">
     <header class="block md:hidden">
       <div class="flex justify-between p-2">

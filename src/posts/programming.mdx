@@ -1,0 +1,94 @@
+---
+abc: 123
+---
+# Programming
+
+This is an example page, used to test out the features of the [MDX engine](https://mdxjs.com).
+A lot of this will be lorem ipsum, but that's okay!
+
+## This is a Level 2 heading.
+
+Let's *test* **out** ***some*** `(inline)` ~styles~!
+
+<br />
+
+## Table
+
+| a     | b  |  c |  d  |
+| -     | :- | -: | :-: |
+| abcde | b  | c  | d   |
+
+<br />
+
+## Tasklist
+
+* [ ] to do
+* [x] done
+
+<br />
+
+```py key=value
+# This is a sample codeblock.
+
+"""
+I'm probably going to talk a lot about code, so
+hopefully this ends up looking nice!
+"""
+
+# Create a list
+L = []
+L = list()
+L = ['a', 'b', 'c', 'd', 'z']
+
+L = ['a']
+
+# Add items to end
+L.append('aa') # ['a', 'aa']
+
+# Insert items at index
+
+# The new item is inserted __before__ the index -
+# you can remember this because the index of the new item
+# is the same as the index you pass in.
+L.insert(0, 'inserted') # ['inserted', 'a', 'aa']
+L.insert(2, 'new') # ['inserted', 'a', 'new', 'aa']
+
+# Clear list
+L.clear()
+
+# Remove an item by value
+L = ['a', 'b', 'c']
+L.remove('b') # ['a', 'c']
+# This only removes __the first__ item.
+L = ['a', 'b', 'a']
+L.remove('a') # ['b', 'a'] -- the second 'a' still exists
+
+# It also raises an error if it doesn't exist.
+L = ['a', 'b']
+```
+
+<br />
+
+$$
+This should be rendered as \LaTeX.
+$$
+
+What's $c^2$? $\sqrt{a^2 + b^2}$!
+
+<br />
+
+a b c d $e$ f g $ h $ i j k
+
+{/* $ is this still math? */}
+
+\$30
+
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet,
+massa quis feugiat vehicula, lectus tortor tempus quam, in luctus
+velit ex vel elit. Praesent auctor id dolor sit amet lobortis. Sed a
+maximus lectus, accumsan suscipit felis. Donec dictum luctus mattis.
+Maecenas in ultrices risus, quis lobortis est. Fusce eget eros eu nibh
+pulvinar interdum. Etiam consequat congue lacus, non tempus arcu
+tincidunt nec. Integer id ultrices velit. Quisque ut nulla ligula.
+Donec dignissim ante urna, a aliquet ligula malesuada quis.

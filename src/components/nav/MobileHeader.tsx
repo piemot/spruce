@@ -103,14 +103,6 @@ function MobileDialog(props: { onClose: () => void }) {
             ))}
           </nav>
         </div>
-        <div className="flex flex-col">
-          <a
-            href="/github"
-            className="mx-auto flex items-center gap-1 pb-2 text-sm text-slate-600 dark:text-slate-400"
-          >
-            <span className="font-mono">__COMMIT_HASH__</span>
-          </a>
-        </div>
       </div>
     </DialogPanel>
   );

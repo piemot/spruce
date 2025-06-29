@@ -1,5 +1,8 @@
-import { defineCollection } from "astro:content";
+import { defineCollection, z } from "astro:content";
+import { glob, file } from "astro/loaders"; // Not available with legacy API
 
-export const collections = {
-  entries: defineCollection({}),
-};
+const posts = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/posts" }),
+});
+
+export const collections = { posts };
