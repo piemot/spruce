@@ -1,34 +1,25 @@
 ---
 import { MobileHeader } from "./MobileHeader.tsx";
-import {
-  TreePineIcon,
-  SearchIcon,
-  MoonStarIcon,
-  ChevronRightIcon,
-} from "@lucide/astro";
+import { TreePineIcon, SearchIcon, MoonStarIcon, ChevronRightIcon } from "@lucide/astro";
 ---
 
 <MobileHeader client:load />
-<header class="hidden md:flex w-full h-[100vh] sticky top-0">
-  <div class="flex-col w-full m-2">
+<header class="sticky top-0 hidden h-[100vh] w-full md:flex">
+  <div class="m-2 w-full flex-col">
     <div class="flex w-full justify-between">
       <a href="/" class="flex items-center gap-1">
         <TreePineIcon class="text-accent-primary" />
-        <span class="text-xl font-header font-semibold text-accent-primary">
-          SpruceBytes
-        </span>
+        <span class="font-header text-xl font-semibold text-accent-primary"> SpruceBytes </span>
       </a>
       <!-- TODO: add Dark Mode -->
-      <button
-        class="invisible bg-gray-200 text-gray-700 hover:bg-gray-300 p-1.5 rounded-lg"
-      >
+      <button class="invisible rounded-lg bg-gray-200 p-1.5 text-gray-700 hover:bg-gray-300">
         <MoonStarIcon />
         <span class="sr-only">Toggle Dark Mode</span>
       </button>
     </div>
     <div class="p-2">
       <div
-        class="flex gap-2 w-full font-header p-2 border border-gray-400 hover:border-gray-500 text-gray-600 rounded-lg"
+        class="flex w-full gap-2 rounded-lg border border-gray-400 p-2 font-header text-gray-600 hover:border-gray-500"
       >
         <SearchIcon />Search
       </div>
@@ -52,11 +43,7 @@ import {
           </span>
           <ul class="pl-5 text-gray-600 *:hover:text-gray-800">
             <li>
-              <a
-                href="/meta/test"
-                class="text-accent-secondary"
-                aria-current="page">Lorem Ipsum</a
-              >
+              <a href="/meta/test" class="text-accent-secondary" aria-current="page">Lorem Ipsum</a>
             </li>
             <li><a href="/meta/test-two">Test Two</a></li>
           </ul>
@@ -74,6 +61,5 @@ import {
       </ul>
     </nav>
   </div>
-  <div class="h-full w-1 bg-gradient-to-b from-emerald-800 to-emerald-500">
-  </div>
+  <div class="h-full w-1 bg-gradient-to-b from-emerald-800 to-emerald-500"></div>
 </header>

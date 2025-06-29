@@ -1,24 +1,12 @@
-import {
-  MoonStarIcon,
-  PanelLeftOpenIcon,
-  SearchIcon,
-  TreePineIcon,
-  XIcon,
-} from "lucide-react";
-import {
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-  Transition,
-  TransitionChild,
-} from "@headlessui/react";
+import { MoonStarIcon, PanelLeftOpenIcon, SearchIcon, TreePineIcon, XIcon } from "lucide-react";
+import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import { useState, type PropsWithChildren } from "react";
 
 function MobileDialogWrapper(
   props: PropsWithChildren<{
     isOpen: boolean;
     setIsOpen: (open: boolean) => void;
-  }>
+  }>,
 ) {
   // Holds transitions to slide in mobile menu and fade-in backdrop
   return (
@@ -27,7 +15,7 @@ function MobileDialogWrapper(
         <TransitionChild>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 dark:bg-gray-900/30 opacity-100 backdrop-blur-sm trasition-opacity transition ease-in duration-200 data-closed:opacity-0 data-enter:duration-100 data-leave:duration-300"
+            className="trasition-opacity fixed inset-0 opacity-100 backdrop-blur-sm transition duration-200 ease-in data-closed:opacity-0 data-enter:duration-100 data-leave:duration-300 dark:bg-gray-900/30"
             aria-hidden="true"
           />
         </TransitionChild>
@@ -47,11 +35,7 @@ function MobileDialog(props: { onClose: () => void }) {
     return (
       <a
         href={props.to}
-        className={
-          "flex gap-2 items-center px-4 py-2" + props.active
-            ? "text-theme-800 dark:text-theme-400"
-            : ""
-        }
+        className={"flex items-center gap-2 px-4 py-2" + props.active ? "text-theme-800 dark:text-theme-400" : ""}
       >
         {props.name}
       </a>
@@ -69,11 +53,7 @@ function MobileDialog(props: { onClose: () => void }) {
       <DialogTitle className="sr-only">Navigation</DialogTitle>
       <div className="flex min-h-screen flex-col justify-between">
         <div className="flex flex-col gap-4">
-          <button
-            type="button"
-            className="size-14 px-4"
-            onClick={() => props.onClose()}
-          >
+          <button type="button" className="size-14 px-4" onClick={() => props.onClose()}>
             <XIcon className="size-6 text-gray-600" />
           </button>
           <ol className="px-4">
@@ -96,7 +76,7 @@ function MobileDialog(props: { onClose: () => void }) {
               <a href="#abc">Header Three</a>
             </li>
           </ol>
-          <div className="h-0.5 w-2/3 mx-auto bg-gray-400" />
+          <div className="mx-auto h-0.5 w-2/3 bg-gray-400" />
           <nav className="flex flex-col px-4">
             {navigation.map((nav) => (
               <HeaderLink key={nav.to} {...nav} />
@@ -117,7 +97,7 @@ export function MobileHeader() {
         <div className="flex justify-between p-2">
           <span className="flex gap-2">
             <button
-              className="bg-gray-200 text-gray-700 hover:bg-gray-300 p-1.5 rounded-lg"
+              className="rounded-lg bg-gray-200 p-1.5 text-gray-700 hover:bg-gray-300"
               onClick={() => setIsOpen(true)}
             >
               <PanelLeftOpenIcon />
@@ -125,17 +105,15 @@ export function MobileHeader() {
             </button>
             <a href="/" className="flex items-center gap-1">
               <TreePineIcon className="text-accent-primary" />
-              <span className="text-xl font-header font-semibold text-accent-primary">
-                SpruceBytes
-              </span>
+              <span className="font-header text-xl font-semibold text-accent-primary">SpruceBytes</span>
             </a>
           </span>
           <span className="flex gap-4">
-            <button className="bg-gray-200 text-gray-700 hover:bg-gray-300 p-1.5 rounded-lg">
+            <button className="rounded-lg bg-gray-200 p-1.5 text-gray-700 hover:bg-gray-300">
               <SearchIcon />
               <span className="sr-only">Search</span>
             </button>
-            <button className="bg-gray-200 text-gray-700 hover:bg-gray-300 p-1.5 rounded-lg">
+            <button className="rounded-lg bg-gray-200 p-1.5 text-gray-700 hover:bg-gray-300">
               <MoonStarIcon />
               <span className="sr-only">Toggle Dark Mode</span>
             </button>
