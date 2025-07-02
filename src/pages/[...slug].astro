@@ -1,13 +1,23 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import Layout from "../layouts/Layout.astro";
-import { getEntry, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 
-const entry = await getEntry("posts", "programming")!;
-const { Content, headings } = await render(entry);
+export async function getStaticPaths() {
+  const projects = await getCollection("posts");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: project,
+  }));
+}
+
+type Props = CollectionEntry<"posts">;
+const project = Astro.props;
+const { Content, headings } = await render(project);
 ---
 
-<Layout title="SpruceBytes" description="SpruceBytes MDX Demo">
+<Layout title={project.data.title} description={project.data.summary}>
   <main>
     <Breadcrumbs
       pages={[

@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "./katex.css";
 
 @theme {
   --color-bg: var(--color-gray-100);

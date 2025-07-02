@@ -2,7 +2,7 @@
 import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
-import react from "@astrojs/react";
+import solidJs from "@astrojs/solid-js";
 import mdx from "@astrojs/mdx";
 
 import remarkMath from "remark-math";
@@ -14,7 +14,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [
-    react(),
+    solidJs(),
     mdx({
       // resets Astro's default mdx config
       extendMarkdownConfig: false,

@@ -1,0 +1,88 @@
+---
+import { XIcon } from "@lucide/astro";
+import HeaderLink from "./HeaderLink.astro";
+
+const navigation = [
+  { name: "hi", to: "hi", active: false },
+  { name: "active", to: "acti", active: true },
+  { name: "test", to: "test", active: false },
+];
+---
+
+<div
+  id="drawer-backdrop"
+  data-closed=""
+  data-close-drawer=""
+  class="trasition-opacity fixed z-10 opacity-100 backdrop-blur-sm transition duration-200 ease-in data-closed:size-0 data-closed:opacity-0 data-open:inset-0 dark:bg-gray-900/30"
+  aria-hidden="true"
+>
+</div>
+<div
+  id="drawer"
+  data-closed=""
+  class="fixed z-10 min-h-full w-[min(20rem,calc(100vw-theme(spacing.10)))] translate-x-0 items-start overflow-hidden overflow-y-auto bg-gray-100 text-gray-800 shadow-2xl transition ease-in-out data-closed:invisible data-closed:-translate-x-full"
+>
+  <span class="sr-only">Navigation</span>
+  <div class="flex min-h-screen flex-col justify-between">
+    <div class="flex flex-col gap-4">
+      <button data-close-drawer type="button" class="size-14 px-4">
+        <XIcon class="size-6 text-gray-600" />
+      </button>
+      <ol class="px-4">
+        <span class="font-header font-semibold">On This Page</span>
+        <li>
+          <a href="#abc">Header One</a>
+        </li>
+        <li>
+          <a href="#abc">Header Two - Longer Header</a>
+          <ol class="pl-4 text-gray-600">
+            <li>
+              <a href="#abc">Part One</a>
+            </li>
+            <li>
+              <a href="#abc">Part Two</a>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <a href="#abc">Header Three</a>
+        </li>
+      </ol>
+      <div class="mx-auto h-0.5 w-2/3 bg-gray-400"></div>
+      <nav class="flex flex-col px-4">
+        {navigation.map((nav) => <HeaderLink {...nav} />)}
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { $sidebarOpen } from "../../util/state";
+
+  const closers = document.querySelectorAll("[data-close-drawer]");
+  for (const closer of closers) {
+    closer.addEventListener("click", () => {
+      $sidebarOpen.set(false);
+    });
+  }
+
+  const backdrop = document.getElementById("drawer-backdrop");
+  const drawer = document.getElementById("drawer");
+
+  if (!backdrop || !drawer) throw new Error();
+
+  $sidebarOpen.subscribe((open) => {
+    console.error("SUBSCRIBE ACTIVE", open);
+    if (open) {
+      delete backdrop.dataset.closed;
+      backdrop.dataset.open = "";
+      delete drawer.dataset.closed;
+      drawer.dataset.open = "";
+    } else {
+      delete backdrop.dataset.open;
+      backdrop.dataset.closed = "";
+      delete drawer.dataset.open;
+      drawer.dataset.closed = "";
+    }
+  });
+</script>
