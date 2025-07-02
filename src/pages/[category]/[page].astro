@@ -1,0 +1,59 @@
+---
+import type { InferGetStaticParamsType, InferGetStaticPropsType, GetStaticPaths } from "astro";
+import { getCollection, render } from "astro:content";
+import { CATEGORIES } from "../../consts";
+import { createSlug, sortProjects } from "../../util/generatePages";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection("posts");
+
+  return CATEGORIES.flatMap((category) => {
+    const categoryProjects = projects.filter((project) => project.data.category === category);
+
+    categoryProjects.sort(sortProjects);
+
+    return categoryProjects.map((project) => ({
+      params: { category: createSlug(category), page: createSlug(project.data.title) },
+      props: { project, titles: { category, page: project.data.title } },
+    }));
+  });
+}) satisfies GetStaticPaths;
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { category, page } = Astro.params;
+const { project, titles } = Astro.props;
+const { Content, headings } = await render(project);
+---
+
+<Layout title={titles.page} description={project.data.summary}>
+  <main>
+    <Breadcrumbs
+      pages={[
+        { name: "Home", path: "/" },
+        { name: titles.category, path: `/${category}` },
+        { name: titles.page, path: `/${category}/${page}` },
+      ]}
+    />
+    <article class="px-4">
+      <Content />
+    </article>
+  </main>
+  <aside class="sticky top-0 hidden h-dvh pt-32 pb-16 md:block">
+    <div class="size-full">
+      <span class="text-lg font-semibold">On This Page</span>
+      <ol>
+        {
+          headings.map((heading) => (
+            <li>
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </aside>
+</Layout>

@@ -1,0 +1,73 @@
+---
+import { ChevronRightIcon } from "@lucide/astro";
+
+interface Props {
+  name: string;
+  href: string;
+  pages: { href: string; name: string; current: boolean }[];
+}
+
+const props = Astro.props;
+---
+
+<collapsible-element data-open="">
+  <li class="list-none">
+    <span class="flex items-center font-semibold text-accent-primary">
+      <ChevronRightIcon class="click-target size-5 transition data-open:rotate-90" />
+      <a href={props.href}>{props.name}</a>
+    </span>
+    <div class="collapse-target grid grid-rows-[0fr] transition-[grid-template-rows] data-open:grid-rows-[1fr]">
+      <ul class="overflow-hidden pl-5 text-gray-600 *:hover:text-gray-800">
+        {
+          props.pages.map((page) =>
+            page.current ? (
+              <li>
+                <a href={page.href} class="text-accent-secondary" aria-current="page">
+                  {page.name}
+                </a>
+              </li>
+            ) : (
+              <li>
+                <a href={page.href}>{page.name}</a>
+              </li>
+            )
+          )
+        }
+      </ul>
+    </div>
+  </li>
+</collapsible-element>
+
+<script>
+  class CollapsibleElement extends HTMLElement {
+    connectedCallback() {
+      let isOpen = this.dataset.open !== undefined;
+
+      const clickTarget: HTMLElement = this.querySelector(".click-target")!;
+      const collapseTarget: HTMLElement = this.querySelector(".collapse-target")!;
+
+      this.updateElement(this, isOpen);
+      this.updateElement(clickTarget, isOpen);
+      this.updateElement(collapseTarget, isOpen);
+
+      clickTarget.addEventListener("click", () => {
+        isOpen = !isOpen;
+        this.updateElement(this, isOpen);
+        this.updateElement(clickTarget, isOpen);
+        this.updateElement(collapseTarget, isOpen);
+      });
+    }
+
+    updateElement(elem: HTMLElement, isOpen: boolean) {
+      if (isOpen) {
+        elem.dataset.open = "";
+        delete elem.dataset.closed;
+      } else {
+        elem.dataset.closed = "";
+        delete elem.dataset.open;
+      }
+    }
+  }
+
+  customElements.define("collapsible-element", CollapsibleElement);
+</script>

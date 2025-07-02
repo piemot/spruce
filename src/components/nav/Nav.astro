@@ -1,6 +1,29 @@
 ---
 import Drawer from "./Drawer.astro";
+import NavCollapsibleCategory from "./NavCollapsibleCategory.astro";
 import { TreePineIcon, SearchIcon, MoonStarIcon, ChevronRightIcon, PanelLeftOpenIcon } from "@lucide/astro";
+import { getCollection } from "astro:content";
+import { CATEGORIES } from "../../consts";
+import { sortProjects, getPostUrl, getCategoryUrl } from "../../util/generatePages";
+
+const posts = await getCollection("posts");
+
+const thisUrl = Astro.url;
+
+const sidebar = CATEGORIES.map((category) => {
+  const categoryPosts = posts.filter((post) => post.data.category === category);
+
+  categoryPosts.sort(sortProjects);
+
+  return {
+    name: category,
+    href: getCategoryUrl(category),
+    pages: categoryPosts.map((post) => {
+      const href = getPostUrl(category, post.data.title);
+      return { name: post.data.title, href, current: thisUrl.pathname === href };
+    }),
+  };
+});
 ---
 
 <Drawer />
@@ -51,38 +74,7 @@ import { TreePineIcon, SearchIcon, MoonStarIcon, ChevronRightIcon, PanelLeftOpen
     </div>
     <nav class="p-2">
       <ul class="flex flex-col">
-        <li>
-          <span class="flex items-center font-semibold text-accent-primary">
-            <ChevronRightIcon class="size-5" />
-            Meta
-          </span>
-          <ul class="pl-5 text-gray-600 *:hover:text-gray-800">
-            <li><a href="/meta/test">Test</a></li>
-            <li><a href="/meta/test-two">Test Two</a></li>
-          </ul>
-        </li>
-        <li>
-          <span class="flex items-center font-semibold text-accent-primary">
-            <ChevronRightIcon class="size-5" />
-            More Meta
-          </span>
-          <ul class="pl-5 text-gray-600 *:hover:text-gray-800">
-            <li>
-              <a href="/meta/test" class="text-accent-secondary" aria-current="page">Lorem Ipsum</a>
-            </li>
-            <li><a href="/meta/test-two">Test Two</a></li>
-          </ul>
-        </li>
-        <li>
-          <span class="flex items-center font-semibold text-accent-primary">
-            <ChevronRightIcon class="size-5" />
-            Meta
-          </span>
-          <ul class="pl-5 text-gray-600 *:hover:text-gray-800">
-            <li><a href="/meta/test">Test</a></li>
-            <li><a href="/meta/test-two">Test Two</a></li>
-          </ul>
-        </li>
+        {sidebar.map((category) => <NavCollapsibleCategory {...category} />)}
       </ul>
     </nav>
   </div>
