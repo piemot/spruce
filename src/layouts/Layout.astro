@@ -3,8 +3,8 @@ import "@fontsource-variable/source-sans-3";
 import "@fontsource-variable/space-grotesk";
 import "@fontsource/space-mono";
 
-import "./src/styles/global.css";
-import "./src/styles/katex.css";
+import "../styles/global.css";
+import "../styles/katex.css";
 
 import Nav from "../components/nav/Nav.astro";
 
@@ -48,10 +48,3 @@ const { title, description } = Astro.props;
     <slot />
   </body>
 </html>
-
-<style>
-  html {
-    width: 100%;
-    min-height: 100%;
-  }
-</style>
