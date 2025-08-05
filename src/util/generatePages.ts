@@ -16,6 +16,49 @@ export function createSlug(title: string): string {
   );
 }
 
+export type MarkdownHeading = {
+  text: string;
+  slug: string;
+  subheadings: MarkdownHeading[];
+};
+
+/** A recursive function to construct a nested list of headings from a flat list of depths */
+function constructHeadingList(headings: { text: string; slug: string; depth: number }[]): MarkdownHeading[] {
+  if (headings.length === 0) return [];
+
+  const result: MarkdownHeading[] = [];
+  let i = 0;
+  while (i < headings.length) {
+    const current = headings[i];
+    // Find where the next heading of the same depth starts
+    let j = i + 1;
+    while (j < headings.length && headings[j].depth > current.depth) {
+      j++;
+    }
+    // Recursively build subheadings
+    result.push({
+      text: current.text,
+      slug: current.slug,
+      subheadings: constructHeadingList(headings.slice(i + 1, j)),
+    });
+    i = j;
+  }
+
+  return result;
+}
+
+/**
+ * Converts a flat array of headings into a nested tree structure.
+ * Excludes the top heading and ignores headings deeper than depthLimit.
+ */
+export function treeifyHeadings(
+  rawHeadings: { text: string; slug: string; depth: number }[],
+  depthLimit = 4,
+): MarkdownHeading[] {
+  const headings = rawHeadings.filter((h) => h.depth > 1 && h.depth <= depthLimit);
+  return constructHeadingList(headings);
+}
+
 export function getCategoryUrl(categoryName: string): string {
   return `/${createSlug(categoryName)}`;
 }

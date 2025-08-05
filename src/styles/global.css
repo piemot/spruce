@@ -20,9 +20,53 @@
     "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+/* fix `tw-prose` `kbd` styling: https://github.com/tailwindlabs/tailwindcss-typography/issues/386 */
+@layer utilities {
+  .prose {
+    & :is(:where(kbd):not(:where([class~="not-prose"], [class~="not-prose"] *))) {
+      --tw-shadow:
+        0 0 0 1px var(--tw-shadow-color, color-mix(in oklab, var(--tw-prose-kbd-shadows) 10%, transparent)),
+        0 3px 0 var(--tw-shadow-color, color-mix(in oklab, var(--tw-prose-kbd-shadows) 10%, transparent));
+      box-shadow:
+        var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+        var(--tw-shadow);
+    }
+  }
+  .prose-gray {
+    --tw-prose-kbd-shadows: var(--color-gray-900);
+  }
+  .prose-slate {
+    --tw-prose-kbd-shadows: var(--color-slate-900);
+  }
+  .prose-stone {
+    --tw-prose-kbd-shadows: var(--color-stone-900);
+  }
+  .prose-neutral {
+    --tw-prose-kbd-shadows: var(--color-neutral-900);
+  }
+  .prose-zinc {
+    --tw-prose-kbd-shadows: var(--color-zinc-900);
+  }
+}
+/* prevent scrolling from snapping all the way to the top */
+@layer utilities {
+  .prose {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      scroll-margin-top: calc(var(--spacing) * 6);
+    }
+  }
+}
 html {
   width: 100%;
   min-height: 100%;
+
+  /* opt-in to smooth scrolling by default (ily modern css) */
+  scroll-behavior: smooth;
 }
 /* Extra styling (mostly for prose) */
 li.task-list-item {

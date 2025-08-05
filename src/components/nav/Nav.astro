@@ -66,14 +66,14 @@ const sidebar = CATEGORIES.map((category) => {
       </button>
     </div>
     <div class="p-2">
-      <div
-        class="flex w-full gap-2 rounded-lg border border-gray-400 p-2 font-header text-gray-600 hover:border-gray-500"
+      <button
+        class="flex w-full items-center gap-2 rounded-lg border border-gray-400 px-2 py-1 font-header text-gray-600 hover:border-gray-500"
       >
-        <SearchIcon />Search
-      </div>
+        <SearchIcon class="size-4" />Search
+      </button>
     </div>
     <nav class="p-2">
-      <ul class="flex flex-col">
+      <ul class="flex flex-col gap-2">
         {sidebar.map((category) => <NavCollapsibleCategory {...category} />)}
       </ul>
     </nav>

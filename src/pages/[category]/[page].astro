@@ -2,9 +2,11 @@
 import type { InferGetStaticParamsType, InferGetStaticPropsType, GetStaticPaths } from "astro";
 import { getCollection, render } from "astro:content";
 import { CATEGORIES } from "../../consts";
-import { createSlug, sortProjects } from "../../util/generatePages";
+import { createSlug, sortProjects, treeifyHeadings } from "../../util/generatePages";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import Layout from "../../layouts/Layout.astro";
+import { TextIcon } from "@lucide/astro";
+import AsideRoot from "../../components/aside/AsideRoot.astro";
 
 export const getStaticPaths = (async () => {
   const projects = await getCollection("posts");
@@ -26,11 +28,13 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { category, page } = Astro.params;
 const { project, titles } = Astro.props;
-const { Content, headings } = await render(project);
+const { Content, headings: rawHeadings } = await render(project);
+
+const headings = treeifyHeadings(rawHeadings);
 ---
 
 <Layout title={titles.page} description={project.data.summary}>
-  <main>
+  <main class="px-6">
     <Breadcrumbs
       pages={[
         { name: "Home", path: "/" },
@@ -38,22 +42,14 @@ const { Content, headings } = await render(project);
         { name: titles.page, path: `/${category}/${page}` },
       ]}
     />
-    <article class="prose max-w-none px-4 prose-gray">
+    <article id="article" class="prose max-w-none pb-8 prose-gray">
       <Content />
     </article>
   </main>
-  <aside class="sticky top-0 hidden h-dvh pt-32 pb-16 md:block">
-    <div class="size-full">
-      <span class="text-lg font-semibold">On This Page</span>
-      <ol>
-        {
-          headings.map((heading) => (
-            <li>
-              <a href={`#${heading.slug}`}>{heading.text}</a>
-            </li>
-          ))
-        }
-      </ol>
+  <aside class="sticky top-0 hidden h-dvh pt-4 pb-16 md:block">
+    <div class="size-full text-gray-600">
+      <span class="flex items-center gap-2 pb-2 font-semibold"><TextIcon class="size-4" />On This Page</span>
+      <AsideRoot headings={headings} />
     </div>
   </aside>
 </Layout>

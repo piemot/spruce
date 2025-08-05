@@ -12,12 +12,12 @@ const props = Astro.props;
 
 <collapsible-element data-open="">
   <li class="list-none">
-    <span class="flex items-center font-semibold text-accent-primary">
+    <span class="flex items-center gap-1 font-semibold text-accent-primary">
       <ChevronRightIcon class="click-target size-5 transition data-open:rotate-90" />
       <a href={props.href}>{props.name}</a>
     </span>
     <div class="collapse-target grid grid-rows-[0fr] transition-[grid-template-rows] data-open:grid-rows-[1fr]">
-      <ul class="overflow-hidden pl-5 text-gray-600 *:hover:text-gray-800">
+      <ul class="overflow-hidden pl-6 text-gray-600 *:hover:text-gray-800">
         {
           props.pages.map((page) =>
             page.current ? (
@@ -30,7 +30,7 @@ const props = Astro.props;
               <li>
                 <a href={page.href}>{page.name}</a>
               </li>
-            ),
+            )
           )
         }
       </ul>
