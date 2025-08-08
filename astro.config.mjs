@@ -11,6 +11,8 @@ import ec from "rehype-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://piemot.github.io",
+  base: "/spruce",
   vite: {
     plugins: [tailwindcss()],
   },
