@@ -43,19 +43,26 @@ const props = Astro.props;
     connectedCallback() {
       let isOpen = this.dataset.open !== undefined;
 
-      const clickTarget: HTMLElement = this.querySelector(".click-target")!;
+      const clickTargets: NodeListOf<HTMLElement> = this.querySelectorAll(".click-target")!;
       const collapseTarget: HTMLElement = this.querySelector(".collapse-target")!;
 
       this.updateElement(this, isOpen);
-      this.updateElement(clickTarget, isOpen);
       this.updateElement(collapseTarget, isOpen);
 
-      clickTarget.addEventListener("click", () => {
+      const onClick = () => {
         isOpen = !isOpen;
+
         this.updateElement(this, isOpen);
-        this.updateElement(clickTarget, isOpen);
         this.updateElement(collapseTarget, isOpen);
-      });
+        for (const clickTarget of clickTargets) {
+          this.updateElement(clickTarget, isOpen);
+        }
+      };
+
+      for (const clickTarget of clickTargets) {
+        this.updateElement(clickTarget, isOpen);
+        clickTarget.addEventListener("click", onClick);
+      }
     }
 
     updateElement(elem: HTMLElement, isOpen: boolean) {

@@ -6,6 +6,8 @@ import mdx from "@astrojs/mdx";
 
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import expressiveCode from "astro-expressive-code";
+import ec from "rehype-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,19 +15,13 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [
+    expressiveCode({
+      themes: ["catppuccin-latte", "catppuccin-mocha"],
+    }),
     mdx({
-      // resets Astro's default mdx config
-      extendMarkdownConfig: false,
-      // Github-Flavoured Markdown is supported automatically
-      gfm: true,
-      shikiConfig: {
-        themes: {
-          light: "catppuccin-latte",
-          dark: "catppuccin-mocha",
-        },
-      },
+      // smartypants: false,
       remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex],
+      rehypePlugins: [[ec, { themes: ["catppuccin-latte", "catppuccin-mocha"] }], rehypeKatex],
     }),
   ],
 });

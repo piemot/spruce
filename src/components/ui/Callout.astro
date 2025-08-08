@@ -1,0 +1,64 @@
+---
+import { CircleCheckIcon, CircleXIcon, CircleQuestionMarkIcon, InfoIcon, TriangleAlertIcon } from "@lucide/astro";
+import invariant from "tiny-invariant";
+import type { HTMLAttributes } from "astro/types";
+
+const VALID_TYPES = ["info", "warning", "error", "success", "help"] as const;
+
+interface Props extends HTMLAttributes<"div"> {
+  title?: string;
+  type?: (typeof VALID_TYPES)[number];
+}
+
+const { title, type = "info", ...props } = Astro.props;
+
+invariant(VALID_TYPES.includes(type));
+
+const cn = {
+  info: "border-info",
+  warning: "border-warning",
+  error: "border-error",
+  success: "border-success",
+  help: "border-violet-500",
+}[type];
+
+const icon = {
+  info: "fill-info",
+  warning: "fill-warning",
+  error: "fill-error",
+  success: "fill-success",
+  help: "fill-violet-500",
+}[type];
+
+const Icon = {
+  info: InfoIcon,
+  warning: TriangleAlertIcon,
+  error: CircleXIcon,
+  success: CircleCheckIcon,
+  help: CircleQuestionMarkIcon,
+}[type];
+---
+
+<div
+  class:list={[
+    "my-4 grid grid-cols-[auto_1fr] gap-2 rounded-xl border bg-card p-3 ps-2 text-sm text-card-foreground shadow-md",
+    cn,
+    props.class,
+  ]}
+  {...props}
+>
+  <slot name="icon">
+    <Icon class:list={["size-5 text-card", icon]} />
+  </slot>
+  <div class="flex min-w-0 flex-col">
+    {title && <p class="!my-0 font-medium">{title}</p>}
+    {
+      /* [&>*:first-child]:!mt-0 [&>*:last-child]:!mb-0 removes margins from top and bottom of first and last children to negate bugs caused by `prose` */
+      Astro.slots.has("default") && (
+        <div class="text-muted-foreground [&>*:first-child]:!mt-0 [&>*:last-child]:!mb-0">
+          <slot name="default" />
+        </div>
+      )
+    }
+  </div>
+</div>

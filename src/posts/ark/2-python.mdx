@@ -1,0 +1,209 @@
+---
+title: Intro to Python
+summary: "Getting started with Python 3: a step-by-step guide to installing tools"
+category: Ark
+publishDate: 2025-08-08
+tags:
+  - ark
+  - python
+  - development
+---
+
+import Kbd from "../../components/ui/Kbd.astro";
+import CollapsibleCallout from "../../components/ui/CollapsibleCallout.astro";
+import Callout from "../../components/ui/Callout.astro";
+import TabItem from "../../components/ui/TabItem.astro";
+import Tabs from "../../components/ui/Tabs.astro";
+import PyLogo from "./python.svg";
+import GeLogo from "./geany.svg";
+import YtLogo from "./youtube.svg";
+
+import { ChevronRightIcon } from "@lucide/astro";
+import { Code } from "astro-expressive-code/components";
+
+# Intro to Python
+
+<Callout type="info">
+  <p class="flex items-center">
+    You can view Mr. Ark's lesson on YouTube:
+    <a
+      href="https://www.youtube.com/watch?v=0cdcKLH7vyc"
+      class="ms-1 inline-flex items-center gap-2 rounded-lg bg-gray-200 px-2 hover:bg-gray-300"
+    >
+      <span class="inline-block size-4 align-middle">
+        <YtLogo class="block h-full w-full" />
+      </span>
+      CS1 Lesson 1 - Intro 1
+    </a>
+  </p>
+</Callout>
+
+Welcome to the course! Hopefully, by now, you have your editor (Geany) set up, you're able to run Python,
+and you're able to open a Terminal app (or PowerShell for Windows users).
+
+## What is Python?
+
+According to [python.org](https://www.python.org/doc/essays/blurb):
+
+> Python is an interpreted, object-oriented, high-level programming language.
+
+That's a lot of words you're probably not familiar with. Let's start with the simplest one:
+
+<dl>
+  <dt>Programming language</dt>
+  <dd>A *programming language* is a set of instructions that lets us describe exactly 
+    what we want our computers to do. In other words, a programming language is just a 
+    list of steps to solve a problem, written in a way that the computer is able to read.</dd>
+
+<dt>High-level</dt>
+<dd>
+  <p>
+    A *high-level* programming language abstracts hardware concepts away from the programmer. What this means is that
+    you, as you program, don't have to worry about everything the computer is doing to make your instructions work. You
+    don't have to worry about what architecture, or operating system, or filesystem the program is running on: you can
+    do the same thing for any computer and it'll just work.
+  </p>
+  <p>
+    This makes Python very similar to English. Instead of complicated symbols, you can express your wishes simillarly to
+    how you'd write them in a sentence. In fact, Python is often used for "pseudo-code": writing out an algorithm in
+    code that's easy to understand for both programmers and non-programmers alike.
+  </p>
+</dd>
+
+<dt>Interpreted</dt>
+<dd>
+  An *interpreted* programming language doesn't need to be *compiled*. Computers operate on bits: a whole bunch of tiny
+  switches that are either set to 1 (on) or 0 (off). We call this binary, because "binary" refers to the two possible
+  states a bit can be in. Put together, these bits can represent numbers, and each number maps to something the computer
+  should be doing - called *machine code*.
+  <Callout type="info">
+    Want to learn more? Look into the **Assembly** set of programming languages - or just watch [Ben Eater's
+    videos](https://www.youtube.com/watch?v=LnzuMJLZRdU), which are some of the best explanations of how computers work
+    I've ever seen.
+  </Callout>
+  Many languages, like C, C++, or Rust, have to be *compiled* into machine code. Instead of that, Python runs the code
+  straight from the source, which means that there's no gap between the code you write and the code that gets executed
+  on the computer.
+</dd>
+
+  <dt>Object-Oriented</dt>
+  <dd>We don't have to worry about what object-oriented languages mean, because most of the 
+  features we'll be starting with aren't written in an object-oriented style. You'll get lots
+  of experience with object-oriented programming (OOP for short) in the second class Mr. Ark 
+  teaches, *Intermediate Python with FLTK*.</dd>
+</dl>
+
+There are two _major versions_ of python that are commonly used - Version 2 and Version 3.
+Version 2 has been deprecated for some time, so this course is taught entirely in Python 3.
+
+Despite this, many operating systems (particularly MacOS) install Python 2 by default,
+because so much old code still relies on it.
+
+<Callout type="info">
+  The definition of **deprecated** is "to express disapproval of." In programming terms, a version or feature is
+  *deprecated* if the authors no longer recommend using it. Python 2 is deprecated because Python 3 can do everything it
+  could, and is _maintained_: it's consistently updated with features, bug fixes, and security patches.
+</Callout>
+
+## Playing Around
+
+### The Python REPL
+
+To get started with Python, open a Terminal or PowerShell window.
+
+<Callout type="help" title="How do I open the Terminal?">
+  For Windows users, press the <Kbd shortcut="Win" /> key to open up the **Start** menu and search for `PowerShell`. For
+  Mac users, either open the **Launchpad** or open Spotlight Search with <Kbd shortcut="Command + Space" /> and search
+  for `Terminal`.
+</Callout>
+
+The terminal is the text-based interface to your operating system. When you type something (called a _command_) into the Terminal,
+you are telling the computer that you want to use a tool. Since we want to use Python 3, we run it by typing `python3`.
+
+Commands aren't executed until you press <Kbd shortcut="Enter" />, so whenever I mention to run a command, remember to press the <Kbd shortcut="Enter" /> key afterward.
+
+```sh title="Terminal"
+$ python3
+```
+
+Running Python launches the _Python interpreter prompt_. You should see the `>>>` symbol before your cursor,
+where you can start typing things. To write your first line of Python code, type `print("Hello World")`, and then press the <Kbd shortcut="Enter" /> key.
+
+You should see your screen look somewhat like this:
+
+```sh title="Terminal"
+$ python3
+Python 3.13.5 (main, Jul 23 2025, 00:30:58) [Clang 20.1.4 ] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print("Hello World")
+Hello World
+>>>
+```
+
+To exit the interpreter prompt, use the keyboard shortcut <Kbd shortcut="Ctrl + D" />.
+
+Using the interpreter is great for short little scripts when you want to play around.
+The problem with the interpreter (or REPL, read-eval-print-loop) is that when you exit it,
+everything you did has been deleted. We can fix that by saving our programs to files.
+
+Python uses the `.py` file extension, just like Word files use `.docx` or image files use `.png`.
+It's a good idea to create a new folder where you can store all the files you work with in this course.
+
+### Navigating the Filesystem
+
+This is a great opportunity to show off what the command line can do! Instead of navigating through
+pages of Finder (on Mac) or File Explorer (on Windows), we can quickly make changes to the file system
+via the `ls`, `cd`, and `mkdir` commands.
+
+So what do these commands do? Let's start with `ls`. If you enter `ls` into your terminal and hit <Kbd shortcut="Enter" />,
+you'll see all the files and folders that exist in your root directory. It might look something like this:
+
+```txt frame="terminal" title="The ls command"
+$ ls
+Applications/      Library/       Public/
+Desktop/           Movies/
+Documents/         Music/
+Downloads/         Pictures/
+```
+
+The Desktop folder holds all the files you can see on your desktop.
+The Downloads folder holds all the files you downloaded, and the other folders all hold similar purposes.
+`ls` stands for "<span class="font-mono text-gray-500"><span class="font-bold text-gray-800">l</span>i<span class="font-bold text-gray-800">s</span>t directory contents</span>."
+A "directory" is another name for a folder in the filesystem.
+
+To change which directory you're in, use the `cd` (<span class="font-mono text-gray-500"><span class="font-bold text-gray-800">c</span>hange <span class="font-bold text-gray-800">d</span>irectory</span>) command.
+For example, to move into your Downloads folder, type `cd Downloads`, and then type `ls` to list all the files in your Downloads.
+`cd` changes your _working directory_, which refers to the directory your command-line is currently in and operating on.
+To check your working directory, run `pwd` (<span class="font-mono text-gray-500"><span class="font-bold text-gray-800">p</span>rint <span class="font-bold text-gray-800">w</span>orking <span class="font-bold text-gray-800">d</span>irectory</span>).
+You should see something like:
+
+```sh
+$ pwd
+/Users/piemot/Downloads
+```
+
+The root directory (in my case, `/Users/piemot`) has a special name; it can be reached via the tilde `~`.
+To return to the root directory, run `cd ~`. Since this is a frequently used command, you can even skip the `~` and just run `cd`.
+You can go back one directory by using `..`. Try `cd`ing into Downloads and then type `cd ..` to return to the root directory another way.
+
+Let's make a new folder. Try running the command `mkdir sample`
+(`mkdir` stands for <span class="font-mono text-gray-500"><span class="font-bold text-gray-800">m</span>a<span class="font-bold text-gray-800">k</span>e <span class="font-bold text-gray-800">dir</span>ectory</span>),
+then try running the `ls` command again. You should see the `sample` folder appear too, because `mkdir` created it.
+
+Run `rmdir sample` to clean up (`rmdir` = <span class="font-mono text-gray-500"><span class="font-bold text-gray-800">r</span>e<span class="font-bold text-gray-800">m</span>ove <span class="font-bold text-gray-800">dir</span>ectory</span>).
+
+Now to make a directory for real.
+Personally, I store my files under a subfolder of Documents, `~/Documents/cs1`. To create this folder, use the `mkdir` command:
+
+```sh
+$ mkdir -p Documents/cs1
+```
+
+<Callout type="info" title="Why is the `-p` there?">
+  Parts of a command that start with a dash, like `-o` or `--opt` are called _flags_. Flags change the way the program
+  works: for `mkdir`, the `-p` flag creates intermediate directories: if the `Documents` folder doesn't exist, mkdir
+  will create it before trying to create `cs1`.
+</Callout>
+
+Being competent with these few commands will make your life so much easier. I definitely recommend playing around a little.
+Note that `rmdir` only deletes empty folders, so it's pretty safe to play with.

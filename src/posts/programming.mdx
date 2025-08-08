@@ -7,6 +7,7 @@ tags:
   - test
   - dev
 ---
+import Callout from '../components/ui/Callout.astro';
 
 # Programming
 
@@ -16,7 +17,58 @@ A lot of this will be lorem ipsum, but that's okay!
 ## This is a Level 2 heading.
 
 Let's _test_ **out** **_some_** `(inline)` ~styles~!
-You'll need to be able to <kbd>CMD</kbd> + <kbd>C</kbd> :)
+You'll need to be able to <kbd>CMD</kbd> + <kbd>C</kbd> (<kbd>⌘</kbd> + <kbd>C</kbd>, <kbd>⌘C</kbd>) or <kbd>CTRL</kbd> + <kbd>C</kbd> (<kbd>^</kbd> + <kbd>C</kbd>, <kbd>^C</kbd>)
+
+<Callout title="Title sample">
+  Hello world!
+</Callout>
+
+<Callout>
+  Body only
+</Callout>
+
+<Callout type="warning" title="Title only">
+</Callout>
+
+<Callout type="error" title="Title only">
+</Callout>
+
+Fumadocs provides many useful extensions to MDX, a markup language. 
+Here is a brief introduction to the default MDX syntax of Fumadocs.
+
+<Callout title="some math" type="success">
+
+What's $c^2$? $\sqrt{a^2 + b^2}$!
+
+A whole lot of oranges cost \$30.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet,
+massa quis feugiat vehicula, lectus tortor tempus quam, in luctus
+velit ex vel elit. Praesent auctor id dolor sit amet lobortis. Sed a
+maximus lectus, accumsan suscipit felis. Donec dictum luctus mattis.
+Maecenas in ultrices risus, quis lobortis est. Fusce eget eros eu nibh
+pulvinar interdum. Etiam consequat congue lacus, non tempus arcu
+tincidunt nec. Integer id ultrices velit. Quisque ut nulla ligula.
+Donec dignissim ante urna, a aliquet ligula malesuada quis.
+</Callout>
+
+
+```tsx
+// highlight a line
+<div>Hello World</div> // [!code highlight]
+
+// highlight a word
+// [!code word:Fumadocs]
+<div>Fumadocs</div>
+
+// diff styles
+console.log('hewwo'); // [!code --]
+console.log('hello'); // [!code ++]
+
+// focus
+return new ResizeObserver(() => {}) // [!code focus]
+```
+
 
 ## Table
 
@@ -41,7 +93,19 @@ You'll need to be able to <kbd>CMD</kbd> + <kbd>C</kbd> :)
 1. five
 1. seven
 
-```py key=value
+
+<dl>
+  <dt>Beast of Bodmin</dt>
+  <dd>A large feline inhabiting Bodmin Moor.</dd>
+
+  <dt>Morgawr</dt>
+  <dd>A sea serpent.</dd>
+
+  <dt>Owlman</dt>
+  <dd>A giant owl-like creature.</dd>
+</dl>
+
+```python title="sample-file.py"
 # This is a sample codeblock.
 
 """

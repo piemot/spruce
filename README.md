@@ -9,5 +9,6 @@ The site is powered by Astro and TailwindCSS.
 
 I started this project when I came across [Revision Time](https://revisionti.me/), which has a very similar premise.
 In designing the website, I took inspiration from
-the [Stripe Documentation](https://docs.stripe.com/)
-and the [Discord Developer Documentation](https://discord.com/developers/docs).
+the [Stripe Documentation](https://docs.stripe.com/),
+the [Discord Developer Documentation](https://discord.com/developers/docs),
+and the [Fumadocs framework](https://fumadocs.dev).

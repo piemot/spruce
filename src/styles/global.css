@@ -7,6 +7,30 @@
   --color-accent-primary: var(--color-emerald-800);
   --color-accent-secondary: var(--color-emerald-700);
 
+  --color-card: var(--color-gray-100);
+  --color-card-foreground: var(--color-gray-950);
+  --color-muted: var(--color-gray-50);
+  --color-muted-foreground: var(--color-gray-500);
+
+  --color-info: var(--color-blue-500);
+  --color-warning: var(--color-amber-500);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-emerald-500);
+
+  /* TODO: cleanup */
+  --sl-color-accent-low: #c7d6ff;
+  --sl-color-accent: #364bff;
+  --sl-color-accent-high: #182775;
+  --sl-color-white: #17181c;
+  --sl-color-gray-1: #24272f;
+  --sl-color-gray-2: #353841;
+  --sl-color-gray-3: #545861;
+  --sl-color-gray-4: #888b96;
+  --sl-color-gray-5: #c0c2c7;
+  --sl-color-gray-6: #eceef2;
+  --sl-color-gray-7: #f5f6f8;
+  --sl-color-black: #ffffff;
+
   --font-*: initial;
   /* based on --font-sans */
   --font-body:
@@ -48,9 +72,10 @@
     --tw-prose-kbd-shadows: var(--color-zinc-900);
   }
 }
-/* prevent scrolling from snapping all the way to the top */
+
 @layer utilities {
   .prose {
+    /* prevent scrolling from snapping all the way to the top */
     h1,
     h2,
     h3,
@@ -59,26 +84,31 @@
     h6 {
       scroll-margin-top: calc(var(--spacing) * 6);
     }
+
+    samp {
+      @apply mx-1 font-semibold text-emerald-900;
+    }
+    /* Extra styling (mostly for GitHub Flavored Markdown prose) */
+    li.task-list-item {
+      @apply flex list-none items-center gap-2;
+    }
+    li.task-list-item input[type="checkbox"] {
+      @apply size-4 rounded-md border border-gray-400 bg-white shadow-xs outline-none;
+    }
+    li.task-list-item input[type="checkbox"]:checked {
+      @apply border-none bg-accent-secondary;
+    }
+
+    ol li::marker {
+      @apply font-semibold;
+    }
   }
 }
+
 html {
   width: 100%;
   min-height: 100%;
 
   /* opt-in to smooth scrolling by default (ily modern css) */
   scroll-behavior: smooth;
-}
-/* Extra styling (mostly for prose) */
-li.task-list-item {
-  @apply flex list-none items-center gap-2;
-}
-li.task-list-item input[type="checkbox"] {
-  @apply size-4 rounded-sm border border-gray-300 bg-white shadow-xs outline-none disabled:opacity-50;
-}
-li.task-list-item input[type="checkbox"]:checked {
-  @apply bg-emerald-700;
-}
-
-ol li::marker {
-  @apply font-semibold;
 }
