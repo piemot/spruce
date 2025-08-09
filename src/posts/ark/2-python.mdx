@@ -25,7 +25,7 @@ import { Code } from "astro-expressive-code/components";
 
 <Callout type="info">
   <p class="flex items-center">
-    You can view Mr. Ark's lesson on YouTube:
+    <span>You can view Mr. Ark's lesson on YouTube:</span>
     <a
       href="https://www.youtube.com/watch?v=0cdcKLH7vyc"
       class="ms-1 inline-flex items-center gap-2 rounded-lg bg-gray-200 px-2 hover:bg-gray-300"
@@ -33,7 +33,7 @@ import { Code } from "astro-expressive-code/components";
       <span class="inline-block size-4 align-middle">
         <YtLogo class="block h-full w-full" />
       </span>
-      CS1 Lesson 1 - Intro 1
+      <span>CS1 Lesson 1 - Intro 1</span>
     </a>
   </p>
 </Callout>
@@ -55,36 +55,36 @@ That's a lot of words you're probably not familiar with. Let's start with the si
     what we want our computers to do. In other words, a programming language is just a 
     list of steps to solve a problem, written in a way that the computer is able to read.</dd>
 
-<dt>High-level</dt>
-<dd>
-  <p>
-    A *high-level* programming language abstracts hardware concepts away from the programmer. What this means is that
-    you, as you program, don't have to worry about everything the computer is doing to make your instructions work. You
-    don't have to worry about what architecture, or operating system, or filesystem the program is running on: you can
-    do the same thing for any computer and it'll just work.
-  </p>
-  <p>
-    This makes Python very similar to English. Instead of complicated symbols, you can express your wishes simillarly to
-    how you'd write them in a sentence. In fact, Python is often used for "pseudo-code": writing out an algorithm in
-    code that's easy to understand for both programmers and non-programmers alike.
-  </p>
-</dd>
+  <dt>High-level</dt>
+  <dd>
+    <p>
+      A *high-level* programming language abstracts hardware concepts away from the programmer. What this means is that
+      you, as you program, don't have to worry about everything the computer is doing to make your instructions work. You
+      don't have to worry about what architecture, or operating system, or filesystem the program is running on: you can
+      do the same thing for any computer and it'll just work.
+    </p>
+    <p>
+      This makes Python very similar to English. Instead of complicated symbols, you can express your wishes simillarly to
+      how you'd write them in a sentence. In fact, Python is often used for "pseudo-code": writing out an algorithm in
+      code that's easy to understand for both programmers and non-programmers alike.
+    </p>
+  </dd>
 
-<dt>Interpreted</dt>
-<dd>
-  An *interpreted* programming language doesn't need to be *compiled*. Computers operate on bits: a whole bunch of tiny
-  switches that are either set to 1 (on) or 0 (off). We call this binary, because "binary" refers to the two possible
-  states a bit can be in. Put together, these bits can represent numbers, and each number maps to something the computer
-  should be doing - called *machine code*.
-  <Callout type="info">
-    Want to learn more? Look into the **Assembly** set of programming languages - or just watch [Ben Eater's
-    videos](https://www.youtube.com/watch?v=LnzuMJLZRdU), which are some of the best explanations of how computers work
-    I've ever seen.
-  </Callout>
-  Many languages, like C, C++, or Rust, have to be *compiled* into machine code. Instead of that, Python runs the code
-  straight from the source, which means that there's no gap between the code you write and the code that gets executed
-  on the computer.
-</dd>
+  <dt>Interpreted</dt>
+  <dd>
+    An *interpreted* programming language doesn't need to be *compiled*. Computers operate on bits: a whole bunch of tiny
+    switches that are either set to 1 (on) or 0 (off). We call this binary, because "binary" refers to the two possible
+    states a bit can be in. Put together, these bits can represent numbers, and each number maps to something the computer
+    should be doing - called *machine code*.
+    <Callout type="info">
+      Want to learn more? Look into the **Assembly** set of programming languages - or just watch [Ben Eater's
+      videos](https://www.youtube.com/watch?v=LnzuMJLZRdU), which are some of the best explanations of how computers work
+      I've ever seen.
+    </Callout>
+    Many languages, like C, C++, or Rust, have to be *compiled* into machine code. Instead of that, Python runs the code
+    straight from the source, which means that there's no gap between the code you write and the code that gets executed
+    on the computer.
+  </dd>
 
   <dt>Object-Oriented</dt>
   <dd>We don't have to worry about what object-oriented languages mean, because most of the 

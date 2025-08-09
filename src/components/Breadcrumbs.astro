@@ -1,5 +1,6 @@
 ---
 import { ChevronRightIcon } from "@lucide/astro";
+import Link from "./Link.astro";
 
 interface Props {
   pages: { name: string; path: string }[];
@@ -14,9 +15,9 @@ const { pages } = Astro.props;
       pages.map((page, i) => (
         <li class="inline-flex items-center" {...(i === pages.length - 1 ? { "aria-current": "page" } : {})}>
           {i !== 0 && <ChevronRightIcon class="size-5 text-gray-400" />}
-          <a href={page.path} class="font-semibold text-accent-primary hover:text-accent-secondary">
+          <Link href={page.path} class="font-semibold text-accent-primary hover:text-accent-secondary">
             {page.name}
-          </a>
+          </Link>
         </li>
       ))
     }

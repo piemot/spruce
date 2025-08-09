@@ -1,0 +1,35 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { ExternalLinkIcon } from "@lucide/astro";
+import { join as joinPath } from "node:path/posix";
+
+export interface Props extends HTMLAttributes<"a"> {
+  href: string;
+  external?: boolean;
+  noEndorse?: boolean;
+  noExternalIcon?: boolean;
+}
+
+const { external = false, noEndorse = false, noExternalIcon = false, href, ...props } = Astro.props;
+
+const relProps: { rel?: string; target?: string } = {};
+if (external) {
+  relProps.rel = [
+    // search engines: link is external • https://microformats.org/wiki/rel-external
+    "external",
+    // search engines: should not be afforded additional weight or ranking • https://microformats.org/wiki/rel-nofollow
+    noEndorse ? "nofollow" : "",
+    // prevent linked page from modifying original page • https://mathiasbynens.github.io/rel-noopener
+    "noopener",
+    // leak no referrer information • https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noreferrer
+    "noreferrer",
+  ]
+    .filter((rel) => rel !== "")
+    .join(" ");
+  relProps.target = "_blank";
+}
+
+const path = new URL(joinPath(import.meta.env.BASE_URL, href), Astro.url).pathname;
+---
+
+<a {...relProps} {...props} href={path}><slot />{external && !noExternalIcon && <ExternalLinkIcon class="size-5" />}</a>

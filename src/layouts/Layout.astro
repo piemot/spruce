@@ -14,6 +14,10 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+
+const root = new URL(import.meta.env.BASE_URL, Astro.url);
+const og = new URL("/og.png", root);
+const favicon = new URL("/favicon.svg", root);
 ---
 
 <!doctype html>
@@ -21,8 +25,9 @@ const { title, description } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={favicon} />
     <meta name="generator" content={Astro.generator} />
+    <base href={root.toString()} />
 
     <title>{title} | SpruceBytes</title>
     <meta name="title" content={title} />
@@ -35,13 +40,13 @@ const { title, description } = Astro.props;
     <meta property="og:site_name" content="SpruceBytes" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL("/og.png", Astro.url)} />
+    <meta property="og:image" content={og} />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content={Astro.url} />
     <meta name="twitter:title" content="SpruceBytes" />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL("/og.png", Astro.url)} />
+    <meta name="twitter:image" content={og} />
   </head>
   <body class="grid h-full w-full grid-cols-1 bg-bg font-body md:grid-cols-[1fr_3fr_1fr]">
     <Nav />

@@ -1,4 +1,5 @@
 ---
+import Link from "../Link.astro";
 import { ChevronRightIcon } from "@lucide/astro";
 
 interface Props {
@@ -14,7 +15,7 @@ const props = Astro.props;
   <li class="list-none">
     <span class="flex items-center gap-1 font-semibold text-accent-primary">
       <ChevronRightIcon class="click-target size-5 transition data-open:rotate-90" />
-      <a href={props.href}>{props.name}</a>
+      <Link href={props.href}>{props.name}</Link>
     </span>
     <div class="collapse-target grid grid-rows-[0fr] transition-[grid-template-rows] data-open:grid-rows-[1fr]">
       <ul class="overflow-hidden pl-6 text-gray-600 *:hover:text-gray-800">
@@ -22,13 +23,13 @@ const props = Astro.props;
           props.pages.map((page) =>
             page.current ? (
               <li>
-                <a href={page.href} class="text-accent-secondary" aria-current="page">
+                <Link href={page.href} class="text-accent-secondary" aria-current="page">
                   {page.name}
-                </a>
+                </Link>
               </li>
             ) : (
               <li>
-                <a href={page.href}>{page.name}</a>
+                <Link href={page.href}>{page.name}</Link>
               </li>
             )
           )

@@ -9,31 +9,33 @@ tags:
   - development
 ---
 
-import Kbd from '../../components/ui/Kbd.astro';
-import CollapsibleCallout from '../../components/ui/CollapsibleCallout.astro';
-import Callout from '../../components/ui/Callout.astro';
-import TabItem from '../../components/ui/TabItem.astro';
-import Tabs from '../../components/ui/Tabs.astro';
-import PyLogo from './python.svg';
-import GeLogo from './geany.svg';
+import { ChevronRightIcon } from "@lucide/astro";
+import { Code } from "astro-expressive-code/components";
 
-import { ChevronRightIcon } from '@lucide/astro'
-import { Code } from 'astro-expressive-code/components'
+import Link from "../../components/Link.astro";
+import Kbd from "../../components/ui/Kbd.astro";
+import CollapsibleCallout from "../../components/ui/CollapsibleCallout.astro";
+import Callout from "../../components/ui/Callout.astro";
+import TabItem from "../../components/ui/TabItem.astro";
+import Tabs from "../../components/ui/Tabs.astro";
+import PyLogo from "./python.svg";
+import GeLogo from "./geany.svg";
 
 # Getting Started with Python
 
 Hi! If you're viewing this, you probably came from
-<span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-700">Mr. Arkiletian</span>'s
-course! I'm <a href="https://github.com/piemot" class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-700">Pierson</a>,
-and I put this website together to give you an alternative to Mr. Ark's videos. I graduated from Hamber last year,
-and I'm currently studying computer science at the University of Victoria.
+
+<span class="bg-gradient-to-r from-teal-600 to-emerald-700 bg-clip-text text-transparent">Mr. Arkiletian</span>'s course! I'm 
+<Link external href="https://github.com/piemot" class="bg-gradient-to-r from-teal-600 to-emerald-700 bg-clip-text text-transparent">Pierson</Link>,
+and I put this website together to give you an alternative to Mr. Ark's videos. 
+I graduated from Hamber last year, and I'm currently studying computer science at the University of Victoria.
 
 ## What you need
 
-The essential things you need for this course are the <span class="size-6 inline-block align-middle"><PyLogo class="h-full w-full block" /></span> Python interpreter 
+The essential things you need for this course are the <span class="size-6 inline-block align-middle"><PyLogo class="h-full w-full block" /></span> Python interpreter
 and the <span class="size-6 inline-block align-middle"><GeLogo class="h-full w-full block" /></span> Geany software editor (or another editor, if you already have experience).
 
-<Callout type="warning" title="Please don't use another editor unless you:" >
+<Callout type="warning" title="Please don't use another editor unless you:">
   <ol>
     <li class="!mt-0">are 100% sure you won't need help with fixing things, or</li>
     <li>have another good reason to.</li>
@@ -57,14 +59,14 @@ and the <span class="size-6 inline-block align-middle"><GeLogo class="h-full w-f
               1. Type `PowerShell`, and
               1. Press <Kbd shortcut="Enter" />.
             </Callout>
-        1. Type `py --version` into your PowerShell window, 
+        1. Type `py --version` into your PowerShell window,
           then press <Kbd shortcut="Enter" /> to run the command.
-        1. PowerShell should show something like: 
+        1. PowerShell should show something like:
             ```powershell title="PowerShell" {2}
             PS> py --version
             Python 3.x.y
             ```
-        1. If you see this output, great! You're done with this segment. 
+        1. If you see this output, great! You're done with this segment.
           Otherwise, you'll need to continue on and install Python on your computer.
 
         ---
@@ -111,7 +113,7 @@ and the <span class="size-6 inline-block align-middle"><GeLogo class="h-full w-f
 
     Once Homebrew is installed, you can run `brew install python` in the Terminal to ask Homebrew to install Python 3.
     Once Python is installed, run `python --version` to verify it works.
-    You should see 
+    You should see
     ```sh title="Terminal" {2}
     $ python --version
     Python 3.x.y
@@ -137,14 +139,15 @@ but Geany gives you the benefit of syntax highlighting, hotkeys, and easy-to-ins
   it can be very difficult to learn to navigate. If you want to try it out, 
   just type `vim` <Kbd shortcut="Enter" /> in a console on a Mac or Linux device.
 
-  **[Visual Studio Code](https://code.visualstudio.com)**, or _VSCode_ for short, is the de-facto editor of most 
+  **[Visual Studio Code](https://code.visualstudio.com)**, or _VSCode_ for short, is the de-facto editor of most
   modern programmers because of its massive ecosystem of extensions. Backed by Microsoft, it can do
-  pretty much anything you need, but its features can make it difficult to understand what's going on 
+  pretty much anything you need, but its features can make it difficult to understand what's going on
   behind the scenes.
 
   **Other options I'd recommend:**
 
-  * [Zed](https://zed.dev), a newer VSCode-inspired editor written in Rust, giving it massive performance benefits
+  - [Zed](https://zed.dev), a newer VSCode-inspired editor written in Rust, giving it massive performance benefits
+
 </CollapsibleCallout>
 
 <Tabs>
@@ -163,9 +166,9 @@ but Geany gives you the benefit of syntax highlighting, hotkeys, and easy-to-ins
         <Callout type="help" title="Which file should I pick?">
           The two files are built for different architectures: the `x86_64` and the `ARM64` architecture.
 
-          The architecture of a computer refers to how the chip works internally. 
-          Specifically, chips Intel manufactured for older Apple devices run `x86` programs, 
-          and Apple Silicon (also known as M1, M2, or other M-series) chips they started 
+          The architecture of a computer refers to how the chip works internally.
+          Specifically, chips Intel manufactured for older Apple devices run `x86` programs,
+          and Apple Silicon (also known as M1, M2, or other M-series) chips they started
           to manufacture in-house in 2020 run `ARM` programs.
 
           Therefore, the file to pick depends on your computer.
@@ -174,7 +177,7 @@ but Geany gives you the benefit of syntax highlighting, hotkeys, and easy-to-ins
           | ARM (Apple Silicon M1, M2, etc) | `geany-2.1_osx_arm64.dmg` |
           | Intel (Intel Core i5, i7, etc)  | `geany-2.1_osx.dmg`       |
 
-          You can check your chip by clicking on the  logo in the top-left corner of your screen, 
+          You can check your chip by clicking on the  logo in the top-left corner of your screen,
           selecting <samp>About This Mac</samp>, and checking the value of **Processor**.
         </Callout>
     1. Open your **Downloads** folder, and double-click the `.dmg` file you selected to launch the installer.
@@ -183,9 +186,9 @@ but Geany gives you the benefit of syntax highlighting, hotkeys, and easy-to-ins
   </TabItem>
 </Tabs>
 
-## Configure Geany 
+## Configure Geany
 
-To test whether Geany works, launch it and create a new file. 
+To test whether Geany works, launch it and create a new file.
 Type in the Python code shown below, and press <Kbd shortcut="Cmd + S" windows="Ctrl + S" /> to save the file.
 Save the file with the name `hello-world.py`.
 
@@ -201,10 +204,11 @@ Congratulations, you just wrote and ran your first bit of Python code on your ow
   <span class="font-semibold inline-flex items-center">Build <ChevronRightIcon class="size-4" /> Set Build Commands</span>.
   Next to the <samp>Execute</samp> box near the bottom of the menu, replace `python3 "%f"` with `py "%f"`, press <kbd>OK</kbd>, and try again.
 
-  If that doesn't work, try opening the same menu and using `python "%f"` instead.
+If that doesn't work, try opening the same menu and using `python "%f"` instead.
 
-  Remember which one of these works! If someone instructs you to use `python3`, 
-  but you ran into this issue, try the same command with `py` or `python` instead.
+Remember which one of these works! If someone instructs you to use `python3`,
+but you ran into this issue, try the same command with `py` or `python` instead.
+
 </Callout>
 
 ## Make your editor colourful
@@ -212,8 +216,9 @@ Congratulations, you just wrote and ran your first bit of Python code on your ow
 You'll spend a lot of time working in the code editor, so it should look appealing to you.
 Geany hosts a whole bunch of themes, shown on the [geany.org/download/themes](https://www.geany.org/download/themes/) page.
 
-In order to enable a theme, just open Geany and press 
-<span class="font-semibold inline-flex items-center">View <ChevronRightIcon class="size-5" /> Change Color Scheme</span>.
+In order to enable a theme, just open Geany and press
+
+<span class="inline-flex items-center font-semibold">View <ChevronRightIcon class="size-5" /> Change Color Scheme</span>.
 Dark themes are traditional, but it's up to you.
 
 <Callout type="info" >
@@ -225,5 +230,3 @@ Dark themes are traditional, but it's up to you.
   mkdir -p ~/.config/geany/colorschemes && mv ~/Downloads/catppuccin-{frappe,macchiato}.conf ~/.config/geany/colorschemes
   ```
 </Callout>
-
-

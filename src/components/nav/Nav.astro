@@ -1,7 +1,8 @@
 ---
 import Drawer from "./Drawer.astro";
 import NavCollapsibleCategory from "./NavCollapsibleCategory.astro";
-import { TreePineIcon, SearchIcon, MoonStarIcon, ChevronRightIcon, PanelLeftOpenIcon } from "@lucide/astro";
+import Link from "../Link.astro";
+import { TreePineIcon, SearchIcon, MoonStarIcon, PanelLeftOpenIcon } from "@lucide/astro";
 import { getCollection } from "astro:content";
 import { CATEGORIES } from "../../consts";
 import { sortProjects, getPostUrl, getCategoryUrl } from "../../util/generatePages";
@@ -34,10 +35,10 @@ const sidebar = CATEGORIES.map((category) => {
         <PanelLeftOpenIcon />
         <span class="sr-only">Open Sidebar</span>
       </button>
-      <a href="/" class="flex items-center gap-1">
+      <Link href="/" class="flex items-center gap-1">
         <TreePineIcon class="text-accent-primary" />
         <span class="font-header text-xl font-semibold text-accent-primary">SpruceBytes</span>
-      </a>
+      </Link>
     </span>
     <span class="flex gap-4">
       <button type="button" class="rounded-lg bg-gray-200 p-1.5 text-gray-700 hover:bg-gray-300">
@@ -55,10 +56,10 @@ const sidebar = CATEGORIES.map((category) => {
 <header class="sticky top-0 hidden h-dvh w-full md:flex">
   <div class="m-2 w-full flex-col">
     <div class="flex w-full justify-between">
-      <a href="/" class="flex items-center gap-1">
+      <Link href="/" class="flex items-center gap-1">
         <TreePineIcon class="text-accent-primary" />
         <span class="font-header text-xl font-semibold text-accent-primary">SpruceBytes</span>
-      </a>
+      </Link>
       <!-- TODO: add Dark Mode -->
       <button class="invisible rounded-lg bg-gray-200 p-1.5 text-gray-700 hover:bg-gray-300">
         <MoonStarIcon />

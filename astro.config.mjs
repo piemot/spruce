@@ -13,6 +13,7 @@ import ec from "rehype-expressive-code";
 export default defineConfig({
   site: "https://piemot.github.io",
   base: "/spruce",
+  trailingSlash: 'never',
   vite: {
     plugins: [tailwindcss()],
   },
