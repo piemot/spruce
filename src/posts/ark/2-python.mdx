@@ -9,17 +9,12 @@ tags:
   - development
 ---
 
+import Link from "../../components/Link.astro";
 import Kbd from "../../components/ui/Kbd.astro";
-import CollapsibleCallout from "../../components/ui/CollapsibleCallout.astro";
 import Callout from "../../components/ui/Callout.astro";
-import TabItem from "../../components/ui/TabItem.astro";
-import Tabs from "../../components/ui/Tabs.astro";
-import PyLogo from "./python.svg";
-import GeLogo from "./geany.svg";
 import YtLogo from "./youtube.svg";
 
-import { ChevronRightIcon } from "@lucide/astro";
-import { Code } from "astro-expressive-code/components";
+export const components = { a: Link }
 
 # Intro to Python
 
