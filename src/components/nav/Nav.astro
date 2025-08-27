@@ -2,7 +2,10 @@
 import Drawer from "./Drawer.astro";
 import NavCollapsibleCategory from "./NavCollapsibleCategory.astro";
 import Link from "../Link.astro";
-import { TreePineIcon, SearchIcon, MoonStarIcon, PanelLeftOpenIcon } from "@lucide/astro";
+import TreePineIcon from "@lucide/astro/icons/tree-pine";
+import SearchIcon from "@lucide/astro/icons/search";
+import MoonStarIcon from "@lucide/astro/icons/moon-star";
+import PanelLeftOpenIcon from "@lucide/astro/icons/panel-left-open";
 import { getCollection } from "astro:content";
 import { CATEGORIES } from "../../consts";
 import { sortProjects, getPostUrl, getCategoryUrl } from "../../util/generatePages";

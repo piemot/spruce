@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import NavCollapsibleCategory from "./NavCollapsibleCategory.astro";
 import { CATEGORIES } from "../../consts";
 import { sortProjects, getPostUrl, getCategoryUrl } from "../../util/generatePages";
-import { XIcon } from "@lucide/astro";
+import XIcon from "@lucide/astro/icons/x";
 
 const posts = await getCollection("posts");
 
