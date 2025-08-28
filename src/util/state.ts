@@ -1,3 +1,3 @@
 import { atom } from "nanostores";
 
-export const $sidebarOpen = atom(false);
+export const sidebarOpen = atom(false);

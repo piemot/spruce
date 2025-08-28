@@ -32,6 +32,8 @@
   --sl-color-black: #ffffff;
 
   --font-*: initial;
+  --default-font-family: "Source Sans 3 Variable";
+
   /* based on --font-sans */
   --font-body:
     "Source Sans 3 Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -43,6 +45,8 @@
   --font-mono:
     "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 /* fix `tw-prose` `kbd` styling: https://github.com/tailwindlabs/tailwindcss-typography/issues/386 */
 @layer utilities {
@@ -103,12 +107,4 @@
       @apply font-semibold;
     }
   }
-}
-
-html {
-  width: 100%;
-  min-height: 100%;
-
-  /* opt-in to smooth scrolling by default (ily modern css) */
-  scroll-behavior: smooth;
 }

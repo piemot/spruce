@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 
+import svelte from "@astrojs/svelte";
 import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
 
@@ -13,7 +14,7 @@ import ec from "rehype-expressive-code";
 export default defineConfig({
   site: "https://piemot.github.io",
   base: "/spruce",
-  trailingSlash: 'never',
+  trailingSlash: "never",
   vite: {
     plugins: [tailwindcss()],
   },
@@ -26,5 +27,6 @@ export default defineConfig({
       remarkPlugins: [remarkMath],
       rehypePlugins: [[ec, { themes: ["catppuccin-latte", "catppuccin-mocha"] }], rehypeKatex],
     }),
+    svelte(),
   ],
 });

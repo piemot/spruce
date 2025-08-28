@@ -1,55 +1,60 @@
 ---
-import type { InferGetStaticParamsType, InferGetStaticPropsType, GetStaticPaths } from "astro";
+import type { InferGetStaticPropsType, GetStaticPaths } from "astro";
 import { getCollection, render } from "astro:content";
 import { CATEGORIES } from "../../consts";
-import { createSlug, sortProjects, treeifyHeadings } from "../../util/generatePages";
-import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { createSlug, sortProjects, getPostUrl, getCategoryUrl } from "../../util/generatePages";
+
+import DesktopToc from "../../components/DesktopToc.svelte";
 import Layout from "../../layouts/Layout.astro";
-import TextIcon from "@lucide/astro/icons/text";
-import AsideRoot from "../../components/aside/AsideRoot.astro";
 
 export const getStaticPaths = (async () => {
-  const projects = await getCollection("posts");
+  const posts = await getCollection("posts");
 
   return CATEGORIES.flatMap((category) => {
-    const categoryProjects = projects.filter((project) => project.data.category === category);
+    const categoryPosts = posts.filter((post) => post.data.category === category);
 
-    categoryProjects.sort(sortProjects);
+    categoryPosts.sort(sortProjects);
 
-    return categoryProjects.map((project) => ({
+    return categoryPosts.map((project) => ({
       params: { category: createSlug(category), page: createSlug(project.data.title) },
       props: { project, titles: { category, page: project.data.title } },
     }));
   });
 }) satisfies GetStaticPaths;
 
-type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { category, page } = Astro.params;
 const { project, titles } = Astro.props;
-const { Content, headings: rawHeadings } = await render(project);
+const { Content, headings } = await render(project);
 
-const headings = treeifyHeadings(rawHeadings);
+const posts = await getCollection("posts");
+const categories = CATEGORIES.map((category) => {
+  const categoryPosts = posts.filter((post) => post.data.category === category);
+
+  categoryPosts.sort(sortProjects);
+
+  return {
+    name: category,
+    href: getCategoryUrl(category),
+    pages: categoryPosts.map((post) => {
+      const href = getPostUrl(category, post.data.title);
+      return { name: post.data.title, href, current: href === Astro.url.pathname };
+    }),
+  };
+});
 ---
 
-<Layout title={titles.page} description={project.data.summary}>
-  <main class="min-w-0 px-6">
-    <Breadcrumbs
-      pages={[
-        { name: "Home", path: "/" },
-        { name: titles.category, path: `/${category}` },
-        { name: titles.page, path: `/${category}/${page}` },
-      ]}
-    />
-    <article id="article" class="prose max-w-none pb-8 prose-gray">
-      <Content />
-    </article>
-  </main>
-  <aside class="sticky top-0 hidden h-dvh pt-4 pb-16 md:block">
-    <div class="size-full text-gray-600">
-      <span class="flex items-center gap-2 pb-2 font-semibold"><TextIcon class="size-4" />On This Page</span>
-      <AsideRoot headings={headings} />
+<Layout title={titles.page + " | " + titles.category} description={project.data.summary} categories={categories}>
+  <main class="flex flex-1 flex-col pb-2 lg:min-w-0 lg:pt-2 lg:pr-2 lg:pl-(--container-2xs)">
+    <div
+      class="mx-auto flex w-full max-w-6xl gap-x-10 p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-gray-950/5 dark:lg:bg-gray-900 dark:lg:ring-white/10"
+    >
+      <div class="w-full flex-1">
+        <article id="article" class="prose max-w-none pb-8 prose-gray dark:prose-invert">
+          <Content />
+        </article>
+      </div>
+      <DesktopToc client:load headings={headings} />
     </div>
-  </aside>
+  </main>
 </Layout>

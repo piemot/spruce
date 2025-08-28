@@ -1,0 +1,73 @@
+---
+import TreePineIcon from "@lucide/astro/icons/tree-pine";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="SpruceBytes"
+  description="A collection of bite-sized tutorials and guides on various tech topics."
+  categories={[]}
+>
+  <main class="flex flex-1 flex-col pb-2 lg:min-w-0 lg:pt-2 lg:pr-2 lg:pl-(--container-2xs)">
+    <div
+      class="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-gray-950/5 dark:lg:bg-gray-900 dark:lg:ring-white/10"
+    >
+      <!-- <div class="relative h-full rounded-xl bg-card p-8 shadow-2xl shadow-emerald-700/50"> -->
+      <!-- <div
+          class="cmp-shine-border pointer-events-none absolute inset-0 size-full rounded-[inherit] will-change-[background-position]"
+        >
+        </div> -->
+      <div class="mx-auto max-w-6xl">
+        <h1
+          class="flex items-center gap-4 font-header text-xl font-semibold text-accent-primary md:text-2xl dark:text-accent-secondary"
+        >
+          <TreePineIcon class="text-accent-primary dark:text-accent-secondary" /> SpruceBytes
+        </h1>
+      </div>
+      <!-- </div> -->
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .cmp-shine-border {
+    --duration: 18s;
+    background-image: radial-gradient(
+      var(--color-emerald-400),
+      var(--color-emerald-700),
+      var(--color-emerald-500),
+      var(--color-sky-600),
+      var(--color-teal-400),
+      var(--color-emerald-700),
+      var(--color-sky-600)
+    );
+    background-size: 300% 300%;
+
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+
+    padding: calc(var(--spacing) * 1);
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: shine var(--duration) infinite linear;
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    to {
+      background-position: 0% 0%;
+    }
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+import "@fontsource-variable/source-sans-3";
+import "@fontsource-variable/space-grotesk";
+import "@fontsource/space-mono";
+
+import "../styles/global.css";
+import "../styles/katex.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const base = Astro.site ?? Astro.url;
+function join(baseUrl: string, file: string) {
+  return baseUrl.endsWith("/") ? `${baseUrl}${file}` : `${baseUrl}/${file}`;
+}
+const og = new URL(join(import.meta.env.BASE_URL, "og.png"), base);
+const favicon = new URL(join(import.meta.env.BASE_URL, "favicon.svg"), base);
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon" type="image/svg+xml" href={favicon} />
+  <meta name="generator" content={Astro.generator} />
+
+  <title>{title} | SpruceBytes</title>
+  <meta name="title" content={title} />
+  <meta name="description" content={description} />
+
+  <meta name="theme-color" content="#065f46" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={Astro.url} />
+  <meta property="og:site_name" content="SpruceBytes" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={og} />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content={Astro.url} />
+  <meta name="twitter:title" content="SpruceBytes" />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={og} />
+</head>

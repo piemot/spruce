@@ -1,1 +1,1 @@
-export const CATEGORIES = ["Programming", "Other Sample Category", "Ark"];
+export const CATEGORIES = ["Programming", "Ark"];

@@ -59,12 +59,17 @@ export function treeifyHeadings(
   return constructHeadingList(headings);
 }
 
+function path(file: string) {
+  const baseUrl = import.meta.env.BASE_URL;
+  return baseUrl.endsWith("/") ? `${baseUrl}${file}` : `${baseUrl}/${file}`;
+}
+
 export function getCategoryUrl(categoryName: string): string {
-  return `/${createSlug(categoryName)}`;
+  return path(`${createSlug(categoryName)}`);
 }
 
 export function getPostUrl(categoryName: string, postName: string): string {
-  return `/${createSlug(categoryName)}/${createSlug(postName)}`;
+  return path(`${createSlug(categoryName)}/${createSlug(postName)}`);
 }
 
 export function sortProjects(a: CollectionEntry<"posts">, b: CollectionEntry<"posts">): number {
