@@ -14,21 +14,25 @@ import { Code } from "astro-expressive-code/components";
 
 import Link from "../../components/Link.astro";
 import Kbd from "../../components/ui/Kbd.astro";
-import CollapsibleCallout from "../../components/ui/CollapsibleCallout.astro";
+import CollapsibleCallout from "../../components/ui/CollapsibleCallout.svelte";
 import Callout from "../../components/ui/Callout.astro";
 import TabItem from "../../components/ui/TabItem.astro";
 import Tabs from "../../components/ui/Tabs.astro";
 import PyLogo from "./python.svg";
 import GeLogo from "./geany.svg";
 
-export const components = { a: Link }
+export const components = { a: Link };
 
 # Getting Started with Python
 
-Hi! If you're viewing this, you probably came from <span class="bg-gradient-to-r from-teal-600 to-emerald-700 bg-clip-text text-transparent">Mr. Arkiletian</span>'s course! I'm 
-<Link external href="https://github.com/piemot" class="bg-gradient-to-r from-teal-600 to-emerald-700 bg-clip-text text-transparent">Pierson</Link>,
-and I put this website together to give you an alternative to Mr. Ark's videos. 
-I graduated from Hamber last year, and I'm currently studying computer science at the University of Victoria.
+Hi! If you're viewing this, you probably came from <span class="bg-gradient-to-r from-teal-600 to-emerald-700 bg-clip-text text-transparent">Mr. Arkiletian</span>'s course! I'm
+<Link
+  external
+  href="https://github.com/piemot"
+  class="bg-gradient-to-r from-teal-600 to-emerald-700 bg-clip-text text-transparent"
+>Pierson</Link>
+, and I put this website together to give you an alternative to Mr. Ark's videos. I graduated from Hamber last year, and
+I'm currently studying computer science at the University of Victoria.
 
 ## What you need
 
@@ -134,23 +138,23 @@ If you already have a code editor installed on your system, you can skip this st
 In theory, any text-processing software will work (_please_ don't try to use Microsoft Word),
 but Geany gives you the benefit of syntax highlighting, hotkeys, and easy-to-install themes.
 
-<CollapsibleCallout title="What other editing options do I have?">
+<CollapsibleCallout client:load title="What other editing options do I have?">
   Personally, I tend to use [`vim`](https://vim.org) because it's 
   pre-installed on nearly every device you'll ever need to use.
   Unfortunately, because it's keyboard-only (you can't use the mouse for __anything__),
   it can be very difficult to learn to navigate. If you want to try it out, 
   just type `vim` <Kbd shortcut="Enter" /> in a console on a Mac or Linux device.
 
-  **[Visual Studio Code](https://code.visualstudio.com)**, or _VSCode_ for short, is the de-facto editor of most
-  modern programmers because of its massive ecosystem of extensions. Backed by Microsoft, it can do
-  pretty much anything you need, but its features can make it difficult to understand what's going on
-  behind the scenes.
+**[Visual Studio Code](https://code.visualstudio.com)**, or _VSCode_ for short, is the de-facto editor of most
+modern programmers because of its massive ecosystem of extensions. Backed by Microsoft, it can do
+pretty much anything you need, but its features can make it difficult to understand what's going on
+behind the scenes.
 
-  **Other options I'd recommend:**
+**Other options I'd recommend:**
 
-  - [Zed](https://zed.dev), a newer VSCode-inspired editor written in Rust, giving it massive performance benefits
-  - [Notepad++](https://notepad-plus-plus.org), a simple Windows-only editor
-  - [JetBrains PyCharm](https://www.jetbrains.com/pycharm/), a full-fledged IDE (Integrated Development Environment) for Python
+- [Zed](https://zed.dev), a newer VSCode-inspired editor written in Rust, giving it massive performance benefits
+- [Notepad++](https://notepad-plus-plus.org), a simple Windows-only editor
+- [JetBrains PyCharm](https://www.jetbrains.com/pycharm/), a full-fledged IDE (Integrated Development Environment) for Python
 
 </CollapsibleCallout>
 
@@ -223,15 +227,18 @@ Geany hosts a whole bunch of themes, shown on the [geany.org/download/themes](ht
 
 In order to enable a theme, just open Geany and press
 
-<span class="inline-flex items-center font-semibold">View <ChevronRightIcon class="size-5" /> Change Color Scheme</span>.
-Dark themes are traditional, but it's up to you.
+<span class="inline-flex items-center font-semibold">
+  View <ChevronRightIcon class="size-5" /> Change Color Scheme
+</span>
+. Dark themes are traditional, but it's up to you.
 
 <Callout type="info" >
   Personally, I prefer to install a theme I use on most of my editors: [Catppuccin](https://github.com/catppuccin/geany/tree/main).
   To install this theme, I download the `catppuccin-frappe.conf` and `catppuccin-macchiato.conf` files from the `src` folder in the GitHub repository,
   then run this command to move them into the `.config/geany/colorschemes` folder:
 
-  ```sh
-  mkdir -p ~/.config/geany/colorschemes && mv ~/Downloads/catppuccin-{frappe,macchiato}.conf ~/.config/geany/colorschemes
-  ```
+```sh
+mkdir -p ~/.config/geany/colorschemes && mv ~/Downloads/catppuccin-{frappe,macchiato}.conf ~/.config/geany/colorschemes
+```
+
 </Callout>
