@@ -5,7 +5,6 @@ import { sortProjects, getPostUrl, getCategoryUrl } from "../util/generatePages"
 
 import TreePineIcon from "@lucide/astro/icons/tree-pine";
 import TelescopeIcon from "@lucide/astro/icons/telescope";
-import GithubIcon from "../assets/github.svg";
 import Layout from "../layouts/Layout.astro";
 
 const posts = await getCollection("posts");
@@ -38,15 +37,18 @@ const categories = CATEGORIES.map((category) => {
       <div id="stars-2" class="stars"></div>
       <div id="stars-3" class="stars"></div>
       <div class="grid size-full place-items-center">
-        <div class="relative rounded-xl bg-card p-8 text-card-foreground shadow-2xl shadow-emerald-700/50">
-          <div class="mx-auto max-w-6xl space-y-6">
+        <div class="relative max-w-xl rounded-xl bg-card p-8 text-card-foreground shadow-2xl shadow-emerald-700/50">
+          <div class="mx-auto space-y-6">
             <h1
               class="flex items-center gap-4 font-header text-2xl font-semibold text-accent-primary md:text-2xl dark:text-accent-secondary"
             >
               <TreePineIcon class="text-accent-primary dark:text-accent-secondary" /> SpruceBytes
             </h1>
-            <p>Hi! Welcome to SpruceBytes. This website is a compilation of course notes and tutorials.</p>
-            <p>Contributions are welcome! Take a look at the GitHub respository linked below.</p>
+            <p>
+              Hi! Welcome to SpruceBytes. If you're reading this, you probably came from Mr. Arkiletian's course! I put
+              this website together to give you an alternative to Mr. Ark's videos. I graduated from Hamber last year,
+              and I'm currently studying computer science at the University of Victoria.
+            </p>
             <a
               href="https://github.com/piemot"
               class="group bg-gradient-to-r from-teal-600 to-emerald-700 bg-clip-text font-header text-transparent"
@@ -55,16 +57,10 @@ const categories = CATEGORIES.map((category) => {
             </a>
             <div class="mt-6 flex w-full flex-col justify-center gap-4 sm:flex-row">
               <a
-                href="https://github.com/piemot/spruce"
-                class="flex gap-2 rounded-md bg-gray-500/20 px-4 py-2 font-header text-gray-800 shadow-sm transition-colors hover:bg-gray-500/30 dark:text-gray-200"
-              >
-                <GithubIcon class="size-6" /> Contribute
-              </a>
-              <a
                 href="/spruce/ark/getting-started"
                 class="rounded-md bg-emerald-500/20 px-4 py-2 font-header text-emerald-800 shadow-sm transition-colors hover:bg-emerald-500/30 dark:text-emerald-200"
               >
-                Learn CS 010
+                Get Started
               </a>
             </div>
           </div>
