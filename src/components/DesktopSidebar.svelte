@@ -19,9 +19,9 @@
   <nav class="flex h-full min-h-0 flex-col">
     <div class="flex flex-col space-y-2.5 border-b border-gray-950/5 p-4 dark:border-white/5">
       <div
-        class="flex w-full items-center gap-3 px-2 py-2.5 text-base/6 font-medium text-gray-950 dark:text-accent-primary"
+        class="flex w-full items-center gap-3 px-2 py-2.5 text-base/6 font-medium text-gray-950 dark:text-emerald-600 dark:hover:text-emerald-500 dark:transition-colors"
       >
-        <a href="/" class="flex items-center gap-3">
+        <a href="/spruce" class="flex items-center gap-3">
           <span class="inline-grid size-7 shrink-0 align-middle">
             <TreePineIcon class="size-full" />
           </span>

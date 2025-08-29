@@ -1,33 +1,138 @@
 ---
+import { getCollection } from "astro:content";
+import { CATEGORIES } from "../consts";
+import { sortProjects, getPostUrl, getCategoryUrl } from "../util/generatePages";
+
 import TreePineIcon from "@lucide/astro/icons/tree-pine";
+import TelescopeIcon from "@lucide/astro/icons/telescope";
+import GithubIcon from "../assets/github.svg";
 import Layout from "../layouts/Layout.astro";
+
+const posts = await getCollection("posts");
+const categories = CATEGORIES.map((category) => {
+  const categoryPosts = posts.filter((post) => post.data.category === category);
+
+  categoryPosts.sort(sortProjects);
+
+  return {
+    name: category,
+    href: getCategoryUrl(category),
+    pages: categoryPosts.map((post) => {
+      const href = getPostUrl(category, post.data.title);
+      return { name: post.data.title, href, current: false };
+    }),
+  };
+});
 ---
 
 <Layout
   title="SpruceBytes"
   description="A collection of bite-sized tutorials and guides on various tech topics."
-  categories={[]}
+  {categories}
 >
   <main class="flex flex-1 flex-col pb-2 lg:min-w-0 lg:pt-2 lg:pr-2 lg:pl-(--container-2xs)">
     <div
-      class="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-gray-950/5 dark:lg:bg-gray-900 dark:lg:ring-white/10"
+      class="relative grow overflow-hidden p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-gray-950/5 dark:lg:bg-gray-900 dark:lg:ring-white/10"
     >
-      <!-- <div class="relative h-full rounded-xl bg-card p-8 shadow-2xl shadow-emerald-700/50"> -->
-      <!-- <div
-          class="cmp-shine-border pointer-events-none absolute inset-0 size-full rounded-[inherit] will-change-[background-position]"
-        >
-        </div> -->
-      <div class="mx-auto max-w-6xl">
-        <h1
-          class="flex items-center gap-4 font-header text-xl font-semibold text-accent-primary md:text-2xl dark:text-accent-secondary"
-        >
-          <TreePineIcon class="text-accent-primary dark:text-accent-secondary" /> SpruceBytes
-        </h1>
+      <div id="stars-1" class="stars"></div>
+      <div id="stars-2" class="stars"></div>
+      <div id="stars-3" class="stars"></div>
+      <div class="grid size-full place-items-center">
+        <div class="bg-card relative rounded-xl p-8 shadow-2xl shadow-emerald-700/50">
+          <div class="mx-auto max-w-6xl space-y-6">
+            <h1
+              class="flex items-center gap-4 font-header text-2xl font-semibold text-accent-primary md:text-2xl dark:text-accent-secondary"
+            >
+              <TreePineIcon class="text-accent-primary dark:text-accent-secondary" /> SpruceBytes
+            </h1>
+            <p>Hi! Welcome to SpruceBytes. This website is a compilation of course notes and tutorials.</p>
+            <p>Contributions are welcome! Take a look at the GitHub respository linked below.</p>
+            <a
+              href="https://github.com/piemot"
+              class="group bg-gradient-to-r from-teal-600 to-emerald-700 bg-clip-text font-header text-transparent"
+            >
+              &ndash; <span class="border-b-emerald-700 group-hover:border-b">Pierson</span>
+            </a>
+            <div class="mt-6 flex w-full flex-col justify-center gap-4 sm:flex-row">
+              <a
+                href="https://github.com/piemot/spruce"
+                class="flex gap-2 rounded-md bg-gray-500/20 px-4 py-2 font-header text-gray-800 shadow-sm transition-colors hover:bg-gray-500/30"
+              >
+                <GithubIcon class="size-6" /> Contribute
+              </a>
+              <a
+                href="/spruce/ark/getting-started"
+                class="rounded-md bg-emerald-500/20 px-4 py-2 font-header text-emerald-800 shadow-sm transition-colors hover:bg-emerald-500/30"
+              >
+                Learn CS 010
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- </div> -->
+      <button
+        class="absolute right-0 bottom-0 mr-4 mb-4 grid items-center rounded-md border border-gray-400 p-1 text-gray-400 hover:bg-gray-950/5 data-active:text-gray-500 dark:border-gray-600 dark:text-gray-600 dark:hover:bg-white/5"
+        aria-label="Pause animation"
+        id="pause-star-animation"
+      >
+        <TelescopeIcon class="size-6" />
+      </button>
     </div>
   </main>
 </Layout>
+
+<script>
+  function initBackground() {
+    function particles(stars: number) {
+      // https://codepen.io/sarazond/pen/LYGbwj
+      const random = (n: number) => Math.floor(Math.random() * n);
+      const value = [];
+      for (let i = 0; i < stars; i++) {
+        value.push(`${random(2000)}px ${random(2000)}px var(--particle-color)`);
+      }
+      return value.join(", ");
+    }
+
+    const stars = [
+      [document.getElementById("stars-1"), particles(1000), 1],
+      [document.getElementById("stars-2"), particles(500), 2],
+      [document.getElementById("stars-3"), particles(250), 3],
+    ] as const;
+
+    for (const [star, particles, size] of stars) {
+      if (!star) {
+        break;
+      }
+      star.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: 50%;
+      box-shadow: ${particles};
+      animation-duration: ${size * 50}s;
+      `;
+    }
+
+    function togglePause() {
+      for (const [star, _, __] of stars) {
+        if (!star) {
+          continue;
+        }
+        if (star.style.animationPlayState === "paused") {
+          star.style.animationPlayState = "running";
+          delete pauseButton!.dataset.active;
+        } else {
+          star.style.animationPlayState = "paused";
+          pauseButton!.dataset.active = "";
+        }
+      }
+    }
+    const pauseButton = document.getElementById("pause-star-animation");
+    if (pauseButton) {
+      pauseButton.addEventListener("click", togglePause);
+    }
+  }
+  initBackground();
+</script>
 
 <style>
   .cmp-shine-border {
@@ -68,6 +173,35 @@ import Layout from "../layouts/Layout.astro";
     }
     to {
       background-position: 0% 0%;
+    }
+  }
+
+  /* -------------------------------------- */
+
+  @keyframes animateStars {
+    0% {
+      transform: translateY(0px);
+    }
+    to {
+      transform: translateY(-2000px);
+    }
+  }
+
+  .stars {
+    background: transparent;
+    animation-name: animateStars;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation-play-state: paused;
+    }
+
+    --particle-color: #000;
+
+    [data-theme="dark"] & {
+      --particle-color: #fff;
     }
   }
 </style>

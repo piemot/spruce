@@ -32,7 +32,7 @@
   --sl-color-black: #ffffff;
 
   --font-*: initial;
-  --default-font-family: "Source Sans 3 Variable";
+  --default-font-family: var(--font-body);
 
   /* based on --font-sans */
   --font-body:
@@ -47,6 +47,17 @@
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@layer base {
+  :root {
+    @variant dark {
+      --color-card: var(--color-gray-900);
+      --color-card-foreground: var(--color-gray-50);
+      --color-muted: var(--color-gray-950);
+      --color-muted-foreground: var(--color-gray-400);
+    }
+  }
+}
 
 /* fix `tw-prose` `kbd` styling: https://github.com/tailwindlabs/tailwindcss-typography/issues/386 */
 @layer utilities {

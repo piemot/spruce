@@ -46,5 +46,7 @@ if (path.endsWith("/")) path = path.slice(0, -1);
 ---
 
 <a {...relProps} {...props} href={path} class:list={[cn, isExternal && "inline-flex items-center"]}>
-  <slot />{isExternal && !noExternalIcon && <ExternalLinkIcon class="size-4 p-0.5 text-gray-700/80" />}
+  <slot />{
+    isExternal && !noExternalIcon && <ExternalLinkIcon class="size-4 p-0.5 text-gray-700/80 dark:text-gray-300/80" />
+  }
 </a>
